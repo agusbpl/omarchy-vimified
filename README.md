@@ -68,11 +68,11 @@ Permite registrar submaps propios o scripts privados (ej. portales académicos, 
 
 ### Método 1: Vía Repositorio Git (Recomendado para compartir)
 
-Una vez subido a GitHub (ej: `https://github.com/<tu-usuario>/omarchy-vimified.git`):
+Una vez subido a GitHub (ej: `https://github.com/agusbpl/omarchy-vimified.git`):
 
 ```bash
 # 1. Agregar y habilitar el plugin en Omarchy Shell
-omarchy plugin add https://github.com/<tu-usuario>/omarchy-vimified.git --enable
+omarchy plugin add https://github.com/agusbpl/omarchy-vimified.git --enable
 
 # 2. Conectar los atajos con Hyprland
 cd ~/.config/omarchy/plugins/omarchy-vimified && ./install.sh
@@ -83,7 +83,7 @@ cd ~/.config/omarchy/plugins/omarchy-vimified && ./install.sh
 Desde el directorio del proyecto:
 
 ```bash
-git clone https://github.com/<tu-usuario>/omarchy-vimified.git
+git clone https://github.com/agusbpl/omarchy-vimified.git
 cd omarchy-vimified
 ./install.sh
 ```
