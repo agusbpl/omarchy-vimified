@@ -26,18 +26,18 @@ var DEFAULT_SUBMAPS = {
     "title": "Alt Hub",
     "tag": "MASTER SUBMAP [ALT + ENTER]",
     "entries": [
-      ["s", "⚙️  System"],
-      ["l", "📚  Learning"],
-      ["p", "💻  Programming"],
-      ["o", "📝  Office"],
-      ["i", "🤖  AI"],
-      ["n", "🌐  Navigation"],
-      ["u", "🎓  UNLP"],
-      ["m", "🎨  Menus"],
-      ["r", "🔔  Reminders"],
-      ["t", "🗣️  TTS"],
-      ["v", "🔊  Volume..."],
-      ["b", "☀️  Brightness..."]
+      ["s", "+System & Hardware"],
+      ["l", "+Learning & Data Science"],
+      ["p", "+Programming & Dev"],
+      ["o", "+Office & Documents"],
+      ["i", "+AI & Language Models"],
+      ["n", "+Navigation & Web"],
+      ["u", "+UNLP University"],
+      ["m", "+Omarchy Menus"],
+      ["r", "+Notifications & Reminders"],
+      ["t", "+Text to Speech (TTS)"],
+      ["v", "+Volume Control..."],
+      ["b", "+Brightness Control..."]
     ]
   },
   "System": {
@@ -46,19 +46,19 @@ var DEFAULT_SUBMAPS = {
     "title": "System & Hardware",
     "tag": "SUBMAP [ALT + S]",
     "entries": [
-      ["f", "Files"],
-      ["m", "Btop"],
-      ["e", "Edit Binds"],
-      ["w", "WiFi Menu"],
-      ["b", "Bluetooth Menu"],
+      ["f", "Files (Nautilus)"],
+      ["m", "Btop System Monitor"],
+      ["e", "Edit Binds (Neovim)"],
+      ["w", "WiFi Network Menu"],
+      ["b", "Bluetooth Devices"],
       ["c", "Activate Camera"],
       ["r", "Record Video"],
       ["s", "Screenshot"],
       ["a", "Audio Settings"],
       ["p", "Clipboard History"],
-      ["q", "Shutdown"],
-      ["v", "Volume Control..."],
-      ["l", "Brightness Control..."]
+      ["q", "Shutdown System"],
+      ["v", "+Volume Control..."],
+      ["l", "+Brightness Control..."]
     ]
   },
   "Learning": {

@@ -17,10 +17,10 @@ Item {
   property string currentSubmapName: "Hub"
   property var currentSubmap: SubmapsModel.getSubmap("Hub")
 
-  // Auto-hide after 15s of inactivity
+  // Auto-hide after 20s of inactivity
   Timer {
     id: autoHideTimer
-    interval: 15000
+    interval: 20000
     repeat: false
     onTriggered: root.close()
   }
@@ -109,35 +109,40 @@ Item {
     readonly property real col1KeyWidth: SubmapsModel.calcKeyWidth(col1Entries)
     readonly property real col2KeyWidth: isTwoCol ? SubmapsModel.calcKeyWidth(col2Entries) : 0
 
+    // Card dimensions
     readonly property real calculatedEntriesWidth: isTwoCol
       ? (col1.implicitWidth + entriesContainer.spacing + col2.implicitWidth)
       : col1.implicitWidth
 
     readonly property real headerMinWidth: iconWrapper.width + 10 + titleCol.implicitWidth + 24 + activeBadge.width
-    readonly property real footerMinWidth: escBadge.width + 6 + footerDesc.implicitWidth
-    readonly property real cardInnerWidth: Math.max(260, calculatedEntriesWidth, headerMinWidth, footerMinWidth)
+    readonly property real footerMinWidth: escBadge.width + 8 + footerDesc.implicitWidth
+    readonly property real cardInnerWidth: Math.max(280, calculatedEntriesWidth, headerMinWidth, footerMinWidth)
 
-    BorderSurface {
+    // Omarchy Card with Electric Blue Border (matching Omarchy calendar popup & Neovim which-key)
+    Rectangle {
       id: card
       anchors.top: parent.top
       anchors.right: parent.right
       anchors.topMargin: 54
       anchors.rightMargin: 20
-      width: panel.cardInnerWidth + 28
-      height: contentColumn.implicitHeight + 22
-      color: Color.menu.background
-      borderSpec: Border.surfaceSpec("menu", "border", Color.menu.border, 1)
-      radius: Style.cornerRadius > 0 ? Style.cornerRadius : 8
+      width: panel.cardInnerWidth + 30
+      height: contentColumn.implicitHeight + 24
+      color: "#121826"
+      border.color: "#7aa2f7"
+      border.width: 1
+      radius: 10
 
       Column {
         id: contentColumn
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: 12
-        anchors.leftMargin: 14
+        anchors.leftMargin: 15
         spacing: 0
 
-        // Header
+        // ==========================================
+        // 1. HEADER (Title, Tag Mode, and ACTIVE)
+        // ==========================================
         Item {
           id: headerBox
           width: panel.cardInnerWidth
@@ -177,7 +182,7 @@ Item {
             Column {
               id: titleCol
               anchors.verticalCenter: parent.verticalCenter
-              spacing: 1
+              spacing: 2
 
               Text {
                 id: titleText
@@ -194,39 +199,54 @@ Item {
                 text: (root.currentSubmap && root.currentSubmap.tag) || ""
                 color: "#566b88"
                 font.family: Style.fontFamily
-                font.pixelSize: 9.5
+                font.pixelSize: 10
                 font.bold: true
                 renderType: Text.NativeRendering
               }
             }
           }
 
+          // Active Mode Pill (Neovim mode style)
           Rectangle {
             id: activeBadge
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            color: "#161f30"
+            color: "#162032"
             border.width: 1
-            border.color: "#273750"
+            border.color: "#2a3b5c"
             radius: 4
-            width: activeText.implicitWidth + 14
-            height: activeText.implicitHeight + 4
+            width: activeRow.implicitWidth + 14
+            height: 22
 
-            Text {
-              id: activeText
+            Row {
+              id: activeRow
               anchors.centerIn: parent
-              text: "ACTIVE"
-              color: "#7aa2f7"
-              font.family: Style.fontFamily
-              font.pixelSize: 9.5
-              font.bold: true
-              renderType: Text.NativeRendering
+              spacing: 5
+
+              Rectangle {
+                width: 6
+                height: 6
+                radius: 3
+                color: "#73daca"
+                anchors.verticalCenter: parent.verticalCenter
+              }
+
+              Text {
+                text: "ACTIVE"
+                color: "#7aa2f7"
+                font.family: Style.fontFamily
+                font.pixelSize: 10
+                font.bold: true
+                renderType: Text.NativeRendering
+                anchors.verticalCenter: parent.verticalCenter
+              }
             }
           }
         }
 
-        Item { width: 1; height: 6 }
+        Item { width: 1; height: 8 }
 
+        // Divider
         Rectangle {
           id: topSep
           width: panel.cardInnerWidth
@@ -234,27 +254,31 @@ Item {
           color: "#1e293b"
         }
 
-        Item { width: 1; height: 8 }
+        Item { width: 1; height: 9 }
 
-        // Entries Container
+        // ==========================================
+        // 2. WHICH-KEY BINDINGS LIST (Columns)
+        // ==========================================
         Row {
           id: entriesContainer
           spacing: 20
 
+          // Column 1
           Column {
             id: col1
-            spacing: 5
+            spacing: 6
 
             Repeater {
               model: panel.col1Entries
 
               delegate: Row {
-                spacing: 9
+                spacing: 8
 
+                // Key Badge: [ key ]
                 Rectangle {
                   id: keyBadge1
                   width: panel.col1KeyWidth
-                  height: 20
+                  height: 21
                   radius: 4
                   color: "#161f30"
                   border.width: 1
@@ -264,7 +288,7 @@ Item {
                   Text {
                     anchors.centerIn: parent
                     text: modelData[0] || ""
-                    color: "#7aa2f7"
+                    color: "#7dcfff"
                     font.family: Style.fontFamily
                     font.pixelSize: 11
                     font.bold: true
@@ -272,33 +296,62 @@ Item {
                   }
                 }
 
+                // Arrow ->
                 Text {
-                  text: modelData[1] || ""
-                  color: "#a9b1d6"
-                  font.family: Style.menuFontFamily || Style.fontFamily
-                  font.pixelSize: 12.5
                   anchors.verticalCenter: parent.verticalCenter
+                  text: "→"
+                  color: "#565f89"
+                  font.family: Style.fontFamily
+                  font.pixelSize: 12
+                  font.bold: true
                   renderType: Text.NativeRendering
+                }
+
+                // Action description
+                Row {
+                  anchors.verticalCenter: parent.verticalCenter
+                  spacing: 1
+
+                  Text {
+                    readonly property bool isGroup: (modelData[1] || "").indexOf("+") === 0
+                    visible: isGroup
+                    text: "+"
+                    color: "#bb9af7"
+                    font.family: Style.fontFamily
+                    font.pixelSize: 12
+                    font.bold: true
+                    renderType: Text.NativeRendering
+                  }
+
+                  Text {
+                    readonly property bool isGroup: (modelData[1] || "").indexOf("+") === 0
+                    text: isGroup ? modelData[1].substring(1) : (modelData[1] || "")
+                    color: isGroup ? "#bb9af7" : "#c0caf5"
+                    font.family: Style.fontFamily
+                    font.pixelSize: 12
+                    renderType: Text.NativeRendering
+                  }
                 }
               }
             }
           }
 
+          // Column 2 (if > 14 entries)
           Column {
             id: col2
             visible: panel.isTwoCol
-            spacing: 5
+            spacing: 6
 
             Repeater {
               model: panel.col2Entries
 
               delegate: Row {
-                spacing: 9
+                spacing: 8
 
                 Rectangle {
                   id: keyBadge2
                   width: panel.col2KeyWidth
-                  height: 20
+                  height: 21
                   radius: 4
                   color: "#161f30"
                   border.width: 1
@@ -308,7 +361,7 @@ Item {
                   Text {
                     anchors.centerIn: parent
                     text: modelData[0] || ""
-                    color: "#7aa2f7"
+                    color: "#7dcfff"
                     font.family: Style.fontFamily
                     font.pixelSize: 11
                     font.bold: true
@@ -317,20 +370,47 @@ Item {
                 }
 
                 Text {
-                  text: modelData[1] || ""
-                  color: "#a9b1d6"
-                  font.family: Style.menuFontFamily || Style.fontFamily
-                  font.pixelSize: 12.5
                   anchors.verticalCenter: parent.verticalCenter
+                  text: "→"
+                  color: "#565f89"
+                  font.family: Style.fontFamily
+                  font.pixelSize: 12
+                  font.bold: true
                   renderType: Text.NativeRendering
+                }
+
+                Row {
+                  anchors.verticalCenter: parent.verticalCenter
+                  spacing: 1
+
+                  Text {
+                    readonly property bool isGroup: (modelData[1] || "").indexOf("+") === 0
+                    visible: isGroup
+                    text: "+"
+                    color: "#bb9af7"
+                    font.family: Style.fontFamily
+                    font.pixelSize: 12
+                    font.bold: true
+                    renderType: Text.NativeRendering
+                  }
+
+                  Text {
+                    readonly property bool isGroup: (modelData[1] || "").indexOf("+") === 0
+                    text: isGroup ? modelData[1].substring(1) : (modelData[1] || "")
+                    color: isGroup ? "#bb9af7" : "#c0caf5"
+                    font.family: Style.fontFamily
+                    font.pixelSize: 12
+                    renderType: Text.NativeRendering
+                  }
                 }
               }
             }
           }
         }
 
-        Item { width: 1; height: 8 }
+        Item { width: 1; height: 9 }
 
+        // Divider
         Rectangle {
           id: botSep
           width: panel.cardInnerWidth
@@ -338,28 +418,30 @@ Item {
           color: "#1e293b"
         }
 
-        Item { width: 1; height: 6 }
+        Item { width: 1; height: 7 }
 
-        // Footer Box
+        // ==========================================
+        // 3. FOOTER (Which-Key Exit)
+        // ==========================================
         Row {
           id: footerBox
-          spacing: 6
+          spacing: 7
 
           Rectangle {
             id: escBadge
             width: escText.implicitWidth + 10
-            height: 18
+            height: 19
             radius: 3
-            color: "#141b29"
+            color: "#162032"
             border.width: 1
-            border.color: "#1e293b"
+            border.color: "#2a3b5c"
             anchors.verticalCenter: parent.verticalCenter
 
             Text {
               id: escText
               anchors.centerIn: parent
               text: "ESC"
-              color: "#566b88"
+              color: "#7aa2f7"
               font.family: Style.fontFamily
               font.pixelSize: 10
               font.bold: true
@@ -370,7 +452,7 @@ Item {
           Text {
             id: footerDesc
             anchors.verticalCenter: parent.verticalCenter
-            text: "Cancel / Exit"
+            text: "close / exit submap"
             color: "#566b88"
             font.family: Style.fontFamily
             font.pixelSize: 11
