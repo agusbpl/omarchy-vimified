@@ -13,6 +13,9 @@ Item {
   property var shell: null
   property var manifest: null
 
+  // Pure Terminal / Neovim Monospace Font
+  readonly property string monoFont: "JetBrainsMono Nerd Font"
+
   property bool opened: false
   property string currentSubmapName: "Hub"
   property var currentSubmap: SubmapsModel.getSubmap("Hub")
@@ -118,7 +121,9 @@ Item {
     readonly property real footerMinWidth: escBadge.width + 8 + footerDesc.implicitWidth
     readonly property real cardInnerWidth: Math.max(280, calculatedEntriesWidth, headerMinWidth, footerMinWidth)
 
-    // Omarchy Card with Electric Blue Border (matching Omarchy calendar popup & Neovim which-key)
+    // =========================================================================
+    // TERMINAL / NEOVIM CARD (Square Corners, Sharp 1px Border, Pure Monospace)
+    // =========================================================================
     Rectangle {
       id: card
       anchors.top: parent.top
@@ -127,10 +132,10 @@ Item {
       anchors.rightMargin: 20
       width: panel.cardInnerWidth + 30
       height: contentColumn.implicitHeight + 24
-      color: "#121826"
+      color: "#10141f"
       border.color: "#7aa2f7"
       border.width: 1
-      radius: 10
+      radius: 0 // Sharp square terminal corners
 
       Column {
         id: contentColumn
@@ -141,7 +146,7 @@ Item {
         spacing: 0
 
         // ==========================================
-        // 1. HEADER (Title, Tag Mode, and ACTIVE)
+        // 1. TERMINAL HEADER ([ Title ] [ ACTIVE ])
         // ==========================================
         Item {
           id: headerBox
@@ -155,8 +160,8 @@ Item {
 
             Item {
               id: iconWrapper
-              width: 22
-              height: 22
+              width: 20
+              height: 20
               anchors.verticalCenter: parent.verticalCenter
 
               Image {
@@ -173,8 +178,8 @@ Item {
                 visible: !svgIcon.visible
                 text: (root.currentSubmap && root.currentSubmap.icon) || "⚡"
                 color: "#7aa2f7"
-                font.family: Style.fontFamily
-                font.pixelSize: 18
+                font.family: root.monoFont
+                font.pixelSize: 16
                 renderType: Text.NativeRendering
               }
             }
@@ -188,7 +193,7 @@ Item {
                 id: titleText
                 text: (root.currentSubmap && root.currentSubmap.title) || ""
                 color: "#c0caf5"
-                font.family: Style.fontFamily
+                font.family: root.monoFont
                 font.pixelSize: 14
                 font.bold: true
                 renderType: Text.NativeRendering
@@ -198,7 +203,7 @@ Item {
                 id: tagText
                 text: (root.currentSubmap && root.currentSubmap.tag) || ""
                 color: "#566b88"
-                font.family: Style.fontFamily
+                font.family: root.monoFont
                 font.pixelSize: 10
                 font.bold: true
                 renderType: Text.NativeRendering
@@ -206,7 +211,7 @@ Item {
             }
           }
 
-          // Active Mode Pill (Neovim mode style)
+          // Active Mode Badge (Square TUI pill)
           Rectangle {
             id: activeBadge
             anchors.right: parent.right
@@ -214,19 +219,20 @@ Item {
             color: "#162032"
             border.width: 1
             border.color: "#2a3b5c"
-            radius: 4
+            radius: 0 // Sharp square corner
             width: activeRow.implicitWidth + 14
             height: 22
 
             Row {
               id: activeRow
               anchors.centerIn: parent
-              spacing: 5
+              spacing: 6
 
+              // Square status indicator
               Rectangle {
                 width: 6
                 height: 6
-                radius: 3
+                radius: 0
                 color: "#73daca"
                 anchors.verticalCenter: parent.verticalCenter
               }
@@ -234,7 +240,7 @@ Item {
               Text {
                 text: "ACTIVE"
                 color: "#7aa2f7"
-                font.family: Style.fontFamily
+                font.family: root.monoFont
                 font.pixelSize: 10
                 font.bold: true
                 renderType: Text.NativeRendering
@@ -274,12 +280,12 @@ Item {
               delegate: Row {
                 spacing: 8
 
-                // Key Badge: [ key ]
+                // Key Badge: [ key ] (Square corners)
                 Rectangle {
                   id: keyBadge1
                   width: panel.col1KeyWidth
                   height: 21
-                  radius: 4
+                  radius: 0 // Sharp square corner
                   color: "#161f30"
                   border.width: 1
                   border.color: "#273750"
@@ -289,7 +295,7 @@ Item {
                     anchors.centerIn: parent
                     text: modelData[0] || ""
                     color: "#7dcfff"
-                    font.family: Style.fontFamily
+                    font.family: root.monoFont
                     font.pixelSize: 11
                     font.bold: true
                     renderType: Text.NativeRendering
@@ -301,7 +307,7 @@ Item {
                   anchors.verticalCenter: parent.verticalCenter
                   text: "→"
                   color: "#565f89"
-                  font.family: Style.fontFamily
+                  font.family: root.monoFont
                   font.pixelSize: 12
                   font.bold: true
                   renderType: Text.NativeRendering
@@ -317,7 +323,7 @@ Item {
                     visible: isGroup
                     text: "+"
                     color: "#bb9af7"
-                    font.family: Style.fontFamily
+                    font.family: root.monoFont
                     font.pixelSize: 12
                     font.bold: true
                     renderType: Text.NativeRendering
@@ -327,7 +333,7 @@ Item {
                     readonly property bool isGroup: (modelData[1] || "").indexOf("+") === 0
                     text: isGroup ? modelData[1].substring(1) : (modelData[1] || "")
                     color: isGroup ? "#bb9af7" : "#c0caf5"
-                    font.family: Style.fontFamily
+                    font.family: root.monoFont
                     font.pixelSize: 12
                     renderType: Text.NativeRendering
                   }
@@ -352,7 +358,7 @@ Item {
                   id: keyBadge2
                   width: panel.col2KeyWidth
                   height: 21
-                  radius: 4
+                  radius: 0 // Sharp square corner
                   color: "#161f30"
                   border.width: 1
                   border.color: "#273750"
@@ -362,7 +368,7 @@ Item {
                     anchors.centerIn: parent
                     text: modelData[0] || ""
                     color: "#7dcfff"
-                    font.family: Style.fontFamily
+                    font.family: root.monoFont
                     font.pixelSize: 11
                     font.bold: true
                     renderType: Text.NativeRendering
@@ -373,7 +379,7 @@ Item {
                   anchors.verticalCenter: parent.verticalCenter
                   text: "→"
                   color: "#565f89"
-                  font.family: Style.fontFamily
+                  font.family: root.monoFont
                   font.pixelSize: 12
                   font.bold: true
                   renderType: Text.NativeRendering
@@ -388,7 +394,7 @@ Item {
                     visible: isGroup
                     text: "+"
                     color: "#bb9af7"
-                    font.family: Style.fontFamily
+                    font.family: root.monoFont
                     font.pixelSize: 12
                     font.bold: true
                     renderType: Text.NativeRendering
@@ -398,7 +404,7 @@ Item {
                     readonly property bool isGroup: (modelData[1] || "").indexOf("+") === 0
                     text: isGroup ? modelData[1].substring(1) : (modelData[1] || "")
                     color: isGroup ? "#bb9af7" : "#c0caf5"
-                    font.family: Style.fontFamily
+                    font.family: root.monoFont
                     font.pixelSize: 12
                     renderType: Text.NativeRendering
                   }
@@ -431,7 +437,7 @@ Item {
             id: escBadge
             width: escText.implicitWidth + 10
             height: 19
-            radius: 3
+            radius: 0 // Sharp square corner
             color: "#162032"
             border.width: 1
             border.color: "#2a3b5c"
@@ -442,7 +448,7 @@ Item {
               anchors.centerIn: parent
               text: "ESC"
               color: "#7aa2f7"
-              font.family: Style.fontFamily
+              font.family: root.monoFont
               font.pixelSize: 10
               font.bold: true
               renderType: Text.NativeRendering
@@ -454,7 +460,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: "close / exit submap"
             color: "#566b88"
-            font.family: Style.fontFamily
+            font.family: root.monoFont
             font.pixelSize: 11
             renderType: Text.NativeRendering
           }
