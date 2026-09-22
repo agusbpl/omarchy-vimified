@@ -117,7 +117,7 @@ Item {
       ? (col1.implicitWidth + entriesContainer.spacing + col2.implicitWidth)
       : col1.implicitWidth
 
-    readonly property real headerMinWidth: iconWrapper.width + 10 + titleCol.implicitWidth + 20
+    readonly property real headerMinWidth: iconWrapper.width + 10 + titleText.implicitWidth + 20
     readonly property real footerMinWidth: escBadge.width + 8 + footerDesc.implicitWidth
     readonly property real cardInnerWidth: Math.max(240, calculatedEntriesWidth, headerMinWidth, footerMinWidth)
 
@@ -146,12 +146,12 @@ Item {
         spacing: 0
 
         // ==========================================
-        // 1. TERMINAL HEADER ([ Title ])
+        // 1. TERMINAL HEADER ([ Icon ] [ Title ])
         // ==========================================
         Item {
           id: headerBox
           width: panel.cardInnerWidth
-          height: Math.max(iconWrapper.height, titleCol.implicitHeight)
+          height: Math.max(iconWrapper.height, titleText.implicitHeight)
 
           Row {
             anchors.left: parent.left
@@ -184,30 +184,15 @@ Item {
               }
             }
 
-            Column {
-              id: titleCol
+            Text {
+              id: titleText
+              text: (root.currentSubmap && root.currentSubmap.title) || ""
+              color: "#c0caf5"
+              font.family: root.monoFont
+              font.pixelSize: 14
+              font.bold: true
+              renderType: Text.NativeRendering
               anchors.verticalCenter: parent.verticalCenter
-              spacing: 2
-
-              Text {
-                id: titleText
-                text: (root.currentSubmap && root.currentSubmap.title) || ""
-                color: "#c0caf5"
-                font.family: root.monoFont
-                font.pixelSize: 14
-                font.bold: true
-                renderType: Text.NativeRendering
-              }
-
-              Text {
-                id: tagText
-                text: (root.currentSubmap && root.currentSubmap.tag) || ""
-                color: "#566b88"
-                font.family: root.monoFont
-                font.pixelSize: 10
-                font.bold: true
-                renderType: Text.NativeRendering
-              }
             }
           }
         }
