@@ -1,0 +1,63 @@
+-- ~/.config/hypr/omarchy-vimified-custom.lua
+-- Archivo de configuración personalizada para omarchy-vimified.
+-- Copia este archivo a ~/.config/hypr/omarchy-vimified-custom.lua para personalizar o extender tus submaps.
+--
+-- omarchy-vimified carga este archivo automáticamente al iniciar Hyprland,
+-- ANTES de compilar el Master Hub (ALT + ENTER), lo que permite que tus submaps
+-- personalizados queden automáticamente integrados tanto con su propio atajo (ALT + <tecla>)
+-- como dentro del Hub maestro.
+
+local vim = _G.omarchy_vimified
+local hl = _G.hl
+local o = _G.o
+local home = os.getenv("HOME") or ""
+
+-- =============================================================================
+-- EJEMPLO 1: Submap Personalizado "UNLP" (Portales Académicos Universitarios)
+-- =============================================================================
+-- Definimos las acciones dentro del submap "UNLP":
+hl.define_submap("UNLP", function()
+  -- submap_cmd(tecla, descripción, comando): ejecuta el comando y resetea el submap
+  vim.submap_cmd("a", "AU24 Económicas", "omarchy-launch-webapp 'https://www.au24-2021.econo.unlp.edu.ar/'")
+  vim.submap_cmd("l", "Cátedras LINTI", "omarchy-launch-webapp 'https://catedras.linti.unlp.edu.ar/index.php?'")
+  vim.submap_cmd("i", "IDEAS Informática", "omarchy-launch-webapp 'https://ideas.info.unlp.edu.ar/'")
+  vim.submap_cmd("m", "Asignaturas Moodle", "omarchy-launch-webapp 'https://asignaturas.info.unlp.edu.ar/my/'")
+
+  -- Salir con ESCAPE
+  hl.bind("ESCAPE", vim.reset_submap)
+end)
+
+-- 1.1 Registrar atajo directo global: ALT + U -> Entrar a UNLP con HUD cheatsheet
+vim.bind_submap("U", "UNLP")
+
+-- 1.2 Registrar en el Master Hub (ALT + ENTER): presionar 'u' o 'U' dentro del Hub abre UNLP
+vim.register_hub_target({ "u", "U" }, "UNLP")
+
+
+-- =============================================================================
+-- EJEMPLO 2: Atajos Globales Directos Personalizados
+-- =============================================================================
+-- Ejemplo: SUPER + ALT + SPACE para inicializar un script de entorno (ej. start.sh en ~/brain)
+-- Desvinculamos el atajo por defecto si colisiona:
+hl.unbind("SUPER + ALT + SPACE")
+o.bind(
+  "SUPER + ALT + SPACE",
+  "Inicializar Cerebro (start.sh)",
+  string.format("uwsm-app -- xdg-terminal-exec --dir=%s/brain -- %s/brain/start.sh", home, home)
+)
+
+
+-- =============================================================================
+-- EJEMPLO 3: Submap Personalizado de Proyectos / Trabajo Local
+-- =============================================================================
+--[[
+hl.define_submap("Work", function()
+  vim.submap_cmd("d", "Dashboard Local", "omarchy-launch-webapp 'http://localhost:3000'")
+  vim.submap_cmd("s", "Servidor Local", "uwsm-app -- xdg-terminal-exec -e bash -c 'npm run dev'")
+  vim.submap_cmd("g", "Git Graph", "uwsm-app -- xdg-terminal-exec -e lazygit")
+  hl.bind("ESCAPE", vim.reset_submap)
+end)
+
+vim.bind_submap("W", "Work")
+vim.register_hub_target({ "w", "W" }, "Work")
+--]]

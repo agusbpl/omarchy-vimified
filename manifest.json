@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "omarchy-vimified",
+  "name": "Omarchy Vimified",
+  "version": "1.0.0",
+  "author": "Agustín Barthe",
+  "description": "Vim-style modal submaps, HJKL window navigation and real-time cheatsheet HUD for Omarchy",
+  "kinds": [
+    "overlay"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "overlay": "Overlay.qml"
+  }
+}
