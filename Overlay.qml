@@ -117,9 +117,9 @@ Item {
       ? (col1.implicitWidth + entriesContainer.spacing + col2.implicitWidth)
       : col1.implicitWidth
 
-    readonly property real headerMinWidth: iconWrapper.width + 10 + titleCol.implicitWidth + 24 + activeBadge.width
+    readonly property real headerMinWidth: iconWrapper.width + 10 + titleCol.implicitWidth + 20
     readonly property real footerMinWidth: escBadge.width + 8 + footerDesc.implicitWidth
-    readonly property real cardInnerWidth: Math.max(280, calculatedEntriesWidth, headerMinWidth, footerMinWidth)
+    readonly property real cardInnerWidth: Math.max(240, calculatedEntriesWidth, headerMinWidth, footerMinWidth)
 
     // =========================================================================
     // TERMINAL / NEOVIM CARD (Square Corners, Sharp 1px Border, Pure Monospace)
@@ -146,12 +146,12 @@ Item {
         spacing: 0
 
         // ==========================================
-        // 1. TERMINAL HEADER ([ Title ] [ ACTIVE ])
+        // 1. TERMINAL HEADER ([ Title ])
         // ==========================================
         Item {
           id: headerBox
           width: panel.cardInnerWidth
-          height: Math.max(iconWrapper.height, titleCol.implicitHeight, activeBadge.height)
+          height: Math.max(iconWrapper.height, titleCol.implicitHeight)
 
           Row {
             anchors.left: parent.left
@@ -210,44 +210,6 @@ Item {
               }
             }
           }
-
-          // Active Mode Badge (Square TUI pill)
-          Rectangle {
-            id: activeBadge
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            color: "#162032"
-            border.width: 1
-            border.color: "#2a3b5c"
-            radius: 0 // Sharp square corner
-            width: activeRow.implicitWidth + 14
-            height: 22
-
-            Row {
-              id: activeRow
-              anchors.centerIn: parent
-              spacing: 6
-
-              // Square status indicator
-              Rectangle {
-                width: 6
-                height: 6
-                radius: 0
-                color: "#73daca"
-                anchors.verticalCenter: parent.verticalCenter
-              }
-
-              Text {
-                text: "ACTIVE"
-                color: "#7aa2f7"
-                font.family: root.monoFont
-                font.pixelSize: 10
-                font.bold: true
-                renderType: Text.NativeRendering
-                anchors.verticalCenter: parent.verticalCenter
-              }
-            }
-          }
         }
 
         Item { width: 1; height: 8 }
@@ -278,7 +240,7 @@ Item {
               model: panel.col1Entries
 
               delegate: Row {
-                spacing: 8
+                spacing: 10
 
                 // Key Badge: [ key ] (Square corners)
                 Rectangle {
@@ -300,17 +262,6 @@ Item {
                     font.bold: true
                     renderType: Text.NativeRendering
                   }
-                }
-
-                // Arrow ->
-                Text {
-                  anchors.verticalCenter: parent.verticalCenter
-                  text: "→"
-                  color: "#565f89"
-                  font.family: root.monoFont
-                  font.pixelSize: 12
-                  font.bold: true
-                  renderType: Text.NativeRendering
                 }
 
                 // Action description
@@ -352,7 +303,7 @@ Item {
               model: panel.col2Entries
 
               delegate: Row {
-                spacing: 8
+                spacing: 10
 
                 Rectangle {
                   id: keyBadge2
@@ -373,16 +324,6 @@ Item {
                     font.bold: true
                     renderType: Text.NativeRendering
                   }
-                }
-
-                Text {
-                  anchors.verticalCenter: parent.verticalCenter
-                  text: "→"
-                  color: "#565f89"
-                  font.family: root.monoFont
-                  font.pixelSize: 12
-                  font.bold: true
-                  renderType: Text.NativeRendering
                 }
 
                 Row {
@@ -458,7 +399,7 @@ Item {
           Text {
             id: footerDesc
             anchors.verticalCenter: parent.verticalCenter
-            text: "close / exit submap"
+            text: "exit"
             color: "#566b88"
             font.family: root.monoFont
             font.pixelSize: 11

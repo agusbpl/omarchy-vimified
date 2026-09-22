@@ -26,24 +26,24 @@ var DEFAULT_SUBMAPS = {
     "title": "Alt Hub",
     "tag": "MASTER SUBMAP [ALT + ENTER]",
     "entries": [
-      ["s", "+System & Hardware"],
-      ["l", "+Learning & Data Science"],
-      ["p", "+Programming & Dev"],
-      ["o", "+Office & Documents"],
-      ["i", "+AI & Language Models"],
-      ["n", "+Navigation & Web"],
-      ["u", "+UNLP University"],
-      ["m", "+Omarchy Menus"],
-      ["r", "+Notifications & Reminders"],
-      ["t", "+Text to Speech (TTS)"],
-      ["v", "+Volume Control..."],
-      ["b", "+Brightness Control..."]
+      ["s", "+System"],
+      ["l", "+Learning"],
+      ["p", "+Programming"],
+      ["o", "+Office"],
+      ["i", "+AI"],
+      ["n", "+Navigation"],
+      ["u", "+UNLP"],
+      ["m", "+Menus"],
+      ["r", "+Reminders"],
+      ["t", "+TTS"],
+      ["v", "+Volume..."],
+      ["b", "+Brightness..."]
     ]
   },
   "System": {
     "icon": "⚙️",
     "iconSvg": SVG_ICONS["System"],
-    "title": "System & Hardware",
+    "title": "System",
     "tag": "SUBMAP [ALT + S]",
     "entries": [
       ["f", "Files (Nautilus)"],
@@ -64,7 +64,7 @@ var DEFAULT_SUBMAPS = {
   "Learning": {
     "icon": "📚",
     "iconSvg": SVG_ICONS["Learning"],
-    "title": "Learning & Data Science",
+    "title": "Learning",
     "tag": "SUBMAP [ALT + L]",
     "entries": [
       ["c", "Cheatsheet Local"],
@@ -98,7 +98,7 @@ var DEFAULT_SUBMAPS = {
   "Programming": {
     "icon": "💻",
     "iconSvg": SVG_ICONS["Programming"],
-    "title": "Programming & Dev",
+    "title": "Programming",
     "tag": "SUBMAP [ALT + P]",
     "entries": [
       ["a", "Antigravity CLI"],
@@ -114,14 +114,14 @@ var DEFAULT_SUBMAPS = {
   "Office": {
     "icon": "📝",
     "iconSvg": SVG_ICONS["Office"],
-    "title": "Office & Documents",
+    "title": "Office",
     "tag": "SUBMAP [ALT + O]",
     "entries": [
       ["n", "Obsidian"],
       ["o", "OnlyOffice"],
       ["m", "Gmail"],
-      ["d", "Google Docs"],
-      ["s", "Google Sheets"],
+      ["d", "Docs"],
+      ["s", "Sheets"],
       ["p", "Okular PDF"],
       ["z", "Zathura PDF"],
       ["t", "DeepL Translator"],
@@ -134,7 +134,7 @@ var DEFAULT_SUBMAPS = {
   "IA": {
     "icon": "🤖",
     "iconSvg": SVG_ICONS["IA"],
-    "title": "AI & Language Models",
+    "title": "AI",
     "tag": "SUBMAP [ALT + I]",
     "entries": [
       ["v", "Voice Dictation"],
@@ -154,7 +154,7 @@ var DEFAULT_SUBMAPS = {
   "NAV": {
     "icon": "🌐",
     "iconSvg": SVG_ICONS["NAV"],
-    "title": "Navigation & Web",
+    "title": "Navigation",
     "tag": "SUBMAP [ALT + N]",
     "entries": [
       ["b", "Web Browser"],
@@ -181,7 +181,7 @@ var DEFAULT_SUBMAPS = {
   "Menus": {
     "icon": "🎨",
     "iconSvg": SVG_ICONS["Menus"],
-    "title": "Omarchy Menus",
+    "title": "Menus",
     "tag": "SUBMAP [ALT + M]",
     "entries": [
       ["m", "Omarchy Main Menu"],
@@ -198,7 +198,7 @@ var DEFAULT_SUBMAPS = {
   "Reminders": {
     "icon": "🔔",
     "iconSvg": SVG_ICONS["Reminders"],
-    "title": "Notifications & Reminders",
+    "title": "Reminders",
     "tag": "SUBMAP [ALT + R]",
     "entries": [
       ["d", "Dismiss Notification"],
@@ -213,7 +213,7 @@ var DEFAULT_SUBMAPS = {
   "TTS": {
     "icon": "🗣️",
     "iconSvg": SVG_ICONS["TTS"],
-    "title": "Text to Speech (TTS)",
+    "title": "TTS",
     "tag": "SUBMAP [ALT + T]",
     "entries": [
       ["p", "Piper TTS ES"],

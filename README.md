@@ -56,15 +56,17 @@ Instead of stretching fingers for complex multi-key shortcuts or relying on mous
 ### HUD Preview (Terminal / Which-Key Aesthetic)
 
 ```text
- ┌─ [⚡] SYSTEM & HARDWARE ──────────────────── [ACTIVE] ─┐
+ ┌─ [⚡] SYSTEM ──────────────────────────────────────────┐
  │                                                        │
  │   [ f ] Files (Nautilus)      [ r ] Record Video       │
  │   [ m ] Btop System Monitor   [ s ] Screenshot         │
  │   [ e ] Edit Binds (Neovim)   [ a ] Audio Settings     │
  │   [ w ] WiFi Network Menu     [ p ] Clipboard History  │
  │   [ b ] Bluetooth Devices     [ q ] Shutdown System    │
- │   [ c ] Activate Camera       [ v ] +Volume Control... │
+ │   [ c ] Activate Camera       [ v ] +Volume...         │
  │                               [ l ] +Brightness...     │
+ ├────────────────────────────────────────────────────────┤
+ │   [ ESC ] exit                                         │
  └────────────────────────────────────────────────────────┘
 ```
 
