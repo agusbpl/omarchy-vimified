@@ -15,6 +15,7 @@ M.hub_targets = {
   { keys = { "o", "O" }, name = "Office" },
   { keys = { "i", "I" }, name = "IA" },
   { keys = { "n", "N" }, name = "NAV" },
+  { keys = { "f", "F" }, name = "Frames" },
   { keys = { "d", "D" }, name = "Resize" },
   { keys = { "m", "M" }, name = "Menus" },
   { keys = { "r", "R" }, name = "Reminders" },
@@ -47,6 +48,19 @@ end
 function M.reset_submap()
   hl.dispatch(hl.dsp.submap("reset"))
   M.dismiss_cheatsheet()
+end
+
+--- Enter a child submap from within a parent submap (breadcrumb navigation)
+--- @param parent_name string Current parent submap name
+--- @param child_name string Target child submap name
+function M.enter_child_submap(parent_name, child_name)
+  local breadcrumb = parent_name .. " > " .. child_name
+  local cmd = string.format(
+    "omarchy-shell shell summon omarchy-vimified '{\"submap\":\"%s\",\"breadcrumb\":\"%s\"}'",
+    child_name, breadcrumb
+  )
+  hl.exec_cmd(cmd)
+  hl.dispatch(hl.dsp.submap(child_name))
 end
 
 --- Create a keybinding inside a submap that resets the submap and runs a command
@@ -90,6 +104,51 @@ function M.setup_navigation()
   hl.unbind("SUPER + K")
   hl.unbind("SUPER + L")
   hl.unbind("SUPER + CTRL + L")
+
+  -- 1b. Unbind window management defaults (absorbed into Frames submap)
+  hl.unbind("SUPER + F")           -- fullscreen
+  hl.unbind("SUPER + CTRL + F")    -- tiled fullscreen
+  hl.unbind("SUPER + ALT + F")     -- maximized
+  hl.unbind("SUPER + T")           -- toggle float
+  hl.unbind("SUPER + P")           -- pseudo
+  hl.unbind("SUPER + O")           -- pop-out
+  hl.unbind("SUPER + G")           -- toggle group
+  hl.unbind("SUPER + ALT + G")     -- move out of group
+
+  -- 1c. Unbind app launchers (absorbed into contextual submaps)
+  hl.unbind("SUPER + SHIFT + RETURN")  -- browser (duplicate)
+  hl.unbind("SUPER + SHIFT + B")       -- browser
+  hl.unbind("SUPER + SHIFT + F")       -- file manager
+  hl.unbind("SUPER + SHIFT + N")       -- editor
+  hl.unbind("SUPER + SHIFT + M")       -- music
+  hl.unbind("SUPER + SHIFT + D")       -- docker
+  hl.unbind("SUPER + SHIFT + G")       -- signal
+  hl.unbind("SUPER + SHIFT + O")       -- obsidian
+  hl.unbind("SUPER + SHIFT + W")       -- omawrite
+  hl.unbind("SUPER + SHIFT + A")       -- chatgpt
+  hl.unbind("SUPER + SHIFT + C")       -- calendar
+  hl.unbind("SUPER + SHIFT + E")       -- email
+  hl.unbind("SUPER + SHIFT + Y")       -- youtube
+  hl.unbind("SUPER + SHIFT + P")       -- photos
+  hl.unbind("SUPER + SHIFT + S")       -- maps
+  hl.unbind("SUPER + SHIFT + X")       -- twitter
+
+  -- 1d. Unbind utility panels (absorbed into System/Menus submaps)
+  hl.unbind("SUPER + CTRL + E")    -- emojis
+  hl.unbind("SUPER + CTRL + C")    -- capture
+  hl.unbind("SUPER + CTRL + O")    -- toggle menu
+  hl.unbind("SUPER + CTRL + H")    -- hardware
+  hl.unbind("SUPER + CTRL + A")    -- audio
+  hl.unbind("SUPER + CTRL + B")    -- bluetooth
+  hl.unbind("SUPER + CTRL + D")    -- display
+  hl.unbind("SUPER + CTRL + W")    -- network
+  hl.unbind("SUPER + CTRL + P")    -- power
+  hl.unbind("SUPER + CTRL + S")    -- share
+  hl.unbind("SUPER + CTRL + Q")    -- calculator
+  hl.unbind("SUPER + CTRL + T")    -- activity
+  hl.unbind("SUPER + CTRL + N")    -- nightlight
+  hl.unbind("SUPER + CTRL + I")    -- idle lock
+  hl.unbind("SUPER + CTRL + Z")    -- zoom
 
   -- 2. Focus Navigation (SUPER + H/J/K/L)
   o.bind("SUPER + H", "Focus left window", hl.dsp.focus({ direction = "l" }))

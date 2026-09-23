@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Platform-Omarchy%20Linux%20%2F%20Hyprland-blue?style=flat-square" alt="Platform">
   <img src="https://img.shields.io/badge/UI-Quickshell%20Layer%20Shell-purple?style=flat-square" alt="Quickshell">
   <img src="https://img.shields.io/badge/Core-Lua%205.1-yellow?style=flat-square" alt="Lua">
-  <img src="https://img.shields.io/badge/Tests-47%20Passed-brightgreen?style=flat-square" alt="Tests">
+  <img src="https://img.shields.io/badge/Tests-96%20Passed-brightgreen?style=flat-square" alt="Tests">
   <img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square" alt="License">
 </p>
 
@@ -133,62 +133,91 @@ Press `ALT + <Key>` to enter a modal submap. The Which-Key HUD will immediately 
 
 | Trigger | Submap Name | Content & Actions |
 | :--- | :--- | :--- |
-| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `d`, etc.) |
+| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `f`, `d`, etc.) |
+| `ALT + F` | **🖥️ Frames** | **Unified Window Management:** Fullscreen (`f`/`F`/`m`), Float/Tile (`t`), Pseudo (`p`), Pop-out (`o`), Split (`s`), Groups (`g`/`G`), Width presets (`w`/`r`), Lock screen (`l`) |
 | `ALT + D` | **📐 Window Resize** | Modal micro-adjustments (**D**imensions: `h`/`l` width 10px, `j`/`k` height 10px, `H`/`L`/`J`/`K` fast 30px, `s`/`r` save & restore width) |
-| `ALT + S` | **⚙️ System & Hardware** | Nautilus, Btop, config editing, WiFi, Bluetooth, Camera, Screenshot, Screen recording, Shutdown |
-| `ALT + P` | **💻 Programming & Dev** | Antigravity AI, Neovim, VSCode, Docker, LazyGit, GitHub, DB managers, Terminal scratchpads |
+| `ALT + S` | **⚙️ System & Hardware** | Nautilus, Btop, config editing, WiFi, Bluetooth, Camera, Screenshot, Screen recording, Nightlight, Idle Lock, Zoom, Display panel, Lock screen, Power panel, Shutdown |
+| `ALT + P` | **💻 Programming & Dev** | Antigravity AI, Zed, Terminal, JupyterLab, LazyGit, GitHub Web, Discord |
 | `ALT + L` | **📚 Learning & Data** | Python, Pandas, Polars, PyTorch, SQL, Jupyter, Hugging Face, documentation and local cheatsheets |
-| `ALT + I` | **🤖 AI & Assistants** | ChatGPT, Claude, Perplexity, DeepSeek, Local LLM UIs, Ollama |
-| `ALT + O` | **📝 Office & Documents** | Obsidian notes, LibreOffice Writer/Calc, PDF reader, Google Drive, Mail client |
-| `ALT + N` | **🌐 Navigation & Web** | Browser windows, private browsing, YouTube, WhatsApp Web, Discord, Telegram |
-| `ALT + M` | **🎨 Omarchy Menus** | Main menu, Apps, Emoji picker, Theme selector, Wallpaper switcher, System monitors |
+| `ALT + I` | **🤖 AI & Assistants** | Gemini, Claude, ChatGPT, Mistral AI, Perplexity, DeepSeek, Kimi, NotebookLM, OpenCode, Grok, Phind, Voice dictation |
+| `ALT + O` | **📝 Office & Documents** | Obsidian notes, OnlyOffice, Gmail, Docs, Sheets, Okular/Zathura PDF, DeepL, WordReference, Wikipedia, Excalidraw, Reading Tracker |
+| `ALT + N` | **🌐 Navigation & Web** | Browser, Gmail, YouTube, YouTube Studio, Telegram, WhatsApp Web, X / Twitter |
+| `ALT + M` | **🎨 Omarchy Menus** | Main menu, Apps, Emoji picker, Theme selector, Wallpaper switcher, Share menu, Hardware menu, Top Bar toggle, Keybindings, Capture menu, Herdr keybindings, Calculator, Power panel |
 | `ALT + R` | **🔔 Reminders & Alerts** | Set timer, view active reminders, dismiss alerts, silence notifications |
 | `ALT + T` | **🗣️ Text to Speech** | Read selection aloud via Piper TTS (Spanish / English voices) |
-| `ALT + V` / `ALT + B` | **🔊 Media & Brightness** | Continuous quick adjustments (`k`/`j` for volume/brightness up & down, `m` for mute) |
+| `ALT + V` / `ALT + B` | **🔊 Media & Brightness** | Continuous quick adjustments (`k`/`j` for volume/brightness up & down, `m` for mute) — accessible directly or nested under System |
+
+---
+
+## 🛠️ omarchy-vimified CLI Utility
+
+Manage, validate, add shortcuts, and query active submaps directly from your terminal:
+
+```bash
+# List all active submaps
+omarchy-vimified list
+
+# Inspect keys within a specific submap
+omarchy-vimified list Frames
+
+# Add a custom shortcut to your declarative config in one command:
+omarchy-vimified add --submap Work --trigger "ALT + W" --key d --label "Dashboard" --cmd "omarchy-launch-webapp 'http://localhost:3000'"
+
+# Validate Lua syntax of all plugin and user configs
+omarchy-vimified validate
+
+# Live reload Hyprland bindings and Which-Key HUD
+omarchy-vimified reload
+```
 
 ---
 
 ## 🧩 User Customization & Extensibility
 
-You can add your own shortcuts, override bindings, or register entirely new submaps **without modifying the plugin repository**.
+### 1. Declarative Configuration (Recommended for Users & AI Agents)
 
-Edit your personal config file:
-```bash
-nvim ~/.config/hypr/omarchy-vimified-custom.lua
-```
+Define your submaps simply as structured Lua tables in `~/.config/hypr/omarchy-vimified-config.lua`:
 
-### Example: Adding a Shortcut to an Existing Submap
 ```lua
-local vim = _G.omarchy_vimified
-
--- Add a key to the existing 'System' submap:
-vim.extend_submap("System", function(submap_cmd)
-  submap_cmd("d", "Docker Desktop", "uwsm-app -- docker-desktop")
-end)
+return {
+  submaps = {
+    {
+      name = "Work",
+      trigger = "ALT + W",
+      icon = "💼",
+      title = "Work Projects",
+      entries = {
+        { key = "d", label = "Dashboard Local", cmd = "omarchy-launch-webapp 'http://localhost:3000'" },
+        { key = "s", label = "Dev Server", cmd = "uwsm-app -- xdg-terminal-exec -e bash -c 'npm run dev'" },
+        { key = "g", label = "Lazygit", cmd = "uwsm-app -- xdg-terminal-exec -e lazygit" },
+      },
+    },
+  },
+  options = {
+    absorb_defaults = true,
+    hud_breadcrumb = true,
+  },
+}
 ```
 
-### Example: Creating a Brand New Submap & Linking to Master Hub
+The plugin automatically parses this table upon launch, binds all modal keys, registers the submap into the Master Hub, and exports the metadata into `~/.config/omarchy/submaps.json` so the Quickshell Which-Key HUD renders it in real-time.
+
+### 2. Imperative Custom Configuration (Advanced)
+
+For advanced hooks, custom functions, or scripts, edit `~/.config/hypr/omarchy-vimified-custom.lua`:
+
 ```lua
 local vim = _G.omarchy_vimified
 local hl = _G.hl
 
--- 1. Define your custom submap
-hl.define_submap("Gaming", function()
-  vim.submap_cmd("s", "Steam", "uwsm-app -- steam")
-  vim.submap_cmd("d", "Discord", "uwsm-app -- discord")
-  vim.submap_cmd("l", "Heroic Launcher", "uwsm-app -- heroic")
+hl.define_submap("UNLP", function()
+  vim.submap_cmd("a", "AU24", "omarchy-launch-webapp 'https://www.au24-2021.econo.unlp.edu.ar/'")
   hl.bind("ESCAPE", vim.reset_submap)
 end)
 
--- 2. Bind direct trigger: ALT + G
-vim.bind_submap("g", "Gaming")
-
--- 3. Register inside the Master Hub (ALT + ENTER):
-vim.register_hub_target({ "g", "G" }, "Gaming")
+vim.bind_submap("U", "UNLP")
+vim.register_hub_target({ "u", "U" }, "UNLP")
 ```
-
-### JSON Submaps Support
-You can also store dynamic or script-generated shortcuts in `~/.config/omarchy/submaps.json`. The Quickshell HUD and Lua loader automatically detect and merge entries on the fly.
 
 ---
 

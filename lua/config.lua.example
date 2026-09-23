@@ -1,0 +1,47 @@
+-- ~/.config/hypr/omarchy-vimified-config.lua
+-- Declarative configuration template for omarchy-vimified.
+-- Copy this file to ~/.config/hypr/omarchy-vimified-config.lua to easily define
+-- your own custom submaps, entries, and icons.
+--
+-- This file is parsed automatically by omarchy-vimified upon Hyprland launch.
+-- Any submaps declared here are automatically:
+--   1. Registered as modal submaps in Hyprland
+--   2. Bound to their global entrance shortcut (e.g. ALT + <key>)
+--   3. Integrated into the Master Hub (ALT + ENTER)
+--   4. Rendered in the Quickshell Which-Key HUD
+
+return {
+  submaps = {
+    -- Example 1: Local Projects / Dev Environments
+    {
+      name = "Work",
+      trigger = "ALT + W",
+      icon = "💼",
+      title = "Work Projects",
+      tag = "SUBMAP [ALT + W]",
+      entries = {
+        { key = "d", label = "Dashboard Local", cmd = "omarchy-launch-webapp 'http://localhost:3000'" },
+        { key = "s", label = "Dev Server", cmd = "uwsm-app -- xdg-terminal-exec -e bash -c 'npm run dev'" },
+        { key = "g", label = "Lazygit", cmd = "uwsm-app -- xdg-terminal-exec -e lazygit" },
+      },
+    },
+
+    -- Example 2: Media & Streaming
+    {
+      name = "Media",
+      trigger = "ALT + M",
+      icon = "🎵",
+      title = "Media Player",
+      tag = "SUBMAP [ALT + M]",
+      entries = {
+        { key = "s", label = "Spotify", cmd = "omarchy-launch-or-focus spotify" },
+        { key = "c", label = "Cliamp TUI", cmd = "uwsm-app -- xdg-terminal-exec -e cliamp" },
+      },
+    },
+  },
+
+  options = {
+    absorb_defaults = true,
+    hud_breadcrumb = true,
+  },
+}

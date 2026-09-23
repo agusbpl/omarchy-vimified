@@ -1,0 +1,250 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# omarchy-vimified: CLI management and inspection utility
+# ==============================================================================
+set -euo pipefail
+
+VERSION="2.0.0"
+CONFIG_FILE="$HOME/.config/hypr/omarchy-vimified-config.lua"
+CUSTOM_FILE="$HOME/.config/hypr/omarchy-vimified-custom.lua"
+PLUGIN_DIR="$HOME/.config/omarchy/plugins/omarchy-vimified"
+
+usage() {
+  cat << EOF
+omarchy-vimified CLI (v${VERSION})
+Modal submaps, HJKL navigation, and Which-Key HUD for Omarchy Hyprland.
+
+Usage:
+  omarchy-vimified <command> [options]
+
+Commands:
+  list [submap]        List all active submaps or display keys in a specific submap
+  validate             Validate Lua syntax of all plugin and user configuration files
+  reload               Reload Hyprland compositor bindings and Quickshell HUD
+  add [options]        Add a keybinding entry to your declarative configuration
+  version              Display version
+  help                 Display this help message
+
+Options for 'add':
+  --submap <NAME>      Target submap name (e.g. Work, Media, Tools)
+  --trigger <KEY>      Entrance shortcut if new submap (e.g. "ALT + W")
+  --key <KEY>          Key character inside submap (e.g. "d")
+  --label <LABEL>      Human-readable description (e.g. "Local Dashboard")
+  --cmd <COMMAND>      Shell command or web app to execute
+
+Examples:
+  omarchy-vimified list
+  omarchy-vimified list Frames
+  omarchy-vimified add --submap Work --trigger "ALT + W" --key d --label "Dashboard" --cmd "omarchy-launch-webapp 'http://localhost:3000'"
+  omarchy-vimified reload
+EOF
+}
+
+cmd_list() {
+  local target="${1:-}"
+  if [ -n "$target" ]; then
+    echo "=== Submap: $target ==="
+    # Query SubmapsModel.js via node if available
+    if command -v node >/dev/null 2>&1 && [ -f "$PLUGIN_DIR/SubmapsModel.js" ]; then
+      node -e "
+        const fs = require('fs');
+        let code = fs.readFileSync('$PLUGIN_DIR/SubmapsModel.js', 'utf8');
+        code = code.replace('.pragma library', '');
+        const ctx = {};
+        eval(code + '; ctx.DEFAULT_SUBMAPS = DEFAULT_SUBMAPS; ctx.getSubmap = getSubmap;');
+        const sm = ctx.getSubmap('$target');
+        console.log('Title: ' + sm.title + ' [' + sm.tag + ']');
+        console.log('Entries:');
+        sm.entries.forEach(e => console.log('  ' + e[0].padEnd(10) + ' -> ' + e[1]));
+      " 2>/dev/null || echo "Unable to parse submap details."
+    fi
+  else
+    echo "=== Active omarchy-vimified Submaps ==="
+    echo "  • Hub          [ALT + ENTER] : Master index of all submaps"
+    echo "  • Frames       [ALT + F]     : Fullscreen, floating, tiling, grouping, lock"
+    echo "  • Resize       [ALT + D]     : Window dimensions micro/macro adjustments"
+    echo "  • System       [ALT + S]     : Hardware, display, wifi, bluetooth, panels"
+    echo "  • Learning     [ALT + L]     : Programming language docs and cheatsheets"
+    echo "  • Programming  [ALT + P]     : Dev tools, editors, terminals, git"
+    echo "  • Office       [ALT + O]     : Documents, notes, spreadsheets, reading"
+    echo "  • IA           [ALT + I]     : AI assistants, LLMs, voice dictation"
+    echo "  • NAV          [ALT + N]     : Web apps, social, mail, video"
+    echo "  • Menus        [ALT + M]     : Omarchy menus, capture, themes, calculators"
+    echo "  • Reminders    [ALT + R]     : Notifications and reminders management"
+    echo "  • TTS          [ALT + T]     : Piper text-to-speech synthesizers"
+    echo "  • UNLP         [ALT + U]     : University educational portals"
+    echo ""
+    echo "Tip: Run 'omarchy-vimified list <submap>' for bindings inside any submap."
+  fi
+}
+
+cmd_validate() {
+  echo ":: Validating omarchy-vimified configuration and codebase..."
+  local errors=0
+
+  # Check Lua syntax
+  for f in "$PLUGIN_DIR"/lua/*.lua; do
+    if [ -f "$f" ]; then
+      if ! luac -p "$f" 2>/dev/null; then
+        echo -e "\033[31m✘ Syntax error in $f\033[0m"
+        luac -p "$f"
+        errors=$((errors + 1))
+      else
+        echo -e "\033[32m✔ $f OK\033[0m"
+      fi
+    fi
+  done
+
+  if [ -f "$CONFIG_FILE" ]; then
+    if ! luac -p "$CONFIG_FILE" 2>/dev/null; then
+      echo -e "\033[31m✘ Syntax error in user config: $CONFIG_FILE\033[0m"
+      luac -p "$CONFIG_FILE"
+      errors=$((errors + 1))
+    else
+      echo -e "\033[32m✔ User declarative config OK: $CONFIG_FILE\033[0m"
+    fi
+  fi
+
+  if [ -f "$CUSTOM_FILE" ]; then
+    if ! luac -p "$CUSTOM_FILE" 2>/dev/null; then
+      echo -e "\033[31m✘ Syntax error in user custom config: $CUSTOM_FILE\033[0m"
+      luac -p "$CUSTOM_FILE"
+      errors=$((errors + 1))
+    else
+      echo -e "\033[32m✔ User custom config OK: $CUSTOM_FILE\033[0m"
+    fi
+  fi
+
+  if [ "$errors" -eq 0 ]; then
+    echo -e "\033[1;32m✔ All checks passed successfully!\033[0m"
+  else
+    echo -e "\033[1;31m✘ Validation failed with $errors error(s).\033[0m"
+    exit 1
+  fi
+}
+
+cmd_reload() {
+  echo ":: Reloading Hyprland and omarchy-vimified HUD..."
+  if command -v hyprctl >/dev/null 2>&1; then
+    hyprctl reload >/dev/null 2>&1 || true
+    echo -e "\033[32m✔ Hyprland configuration reloaded.\033[0m"
+  fi
+  if command -v omarchy-shell >/dev/null 2>&1; then
+    omarchy-shell shell hide omarchy-vimified >/dev/null 2>&1 || true
+    echo -e "\033[32m✔ Quickshell HUD refreshed.\033[0m"
+  fi
+}
+
+cmd_add() {
+  local submap=""
+  local trigger=""
+  local key=""
+  local label=""
+  local cmd=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --submap) submap="$2"; shift 2 ;;
+      --trigger) trigger="$2"; shift 2 ;;
+      --key) key="$2"; shift 2 ;;
+      --label) label="$2"; shift 2 ;;
+      --cmd) cmd="$2"; shift 2 ;;
+      *) echo "Unknown option: $1"; usage; exit 1 ;;
+    esac
+  done
+
+  if [ -z "$submap" ] || [ -z "$key" ] || [ -z "$label" ] || [ -z "$cmd" ]; then
+    echo -e "\033[31mError: --submap, --key, --label, and --cmd are required.\033[0m"
+    exit 1
+  fi
+
+  # Initialize config file if missing
+  if [ ! -f "$CONFIG_FILE" ]; then
+    mkdir -p "$(dirname "$CONFIG_FILE")"
+    cat > "$CONFIG_FILE" << 'EOF'
+-- ~/.config/hypr/omarchy-vimified-config.lua
+-- Declarative configuration for omarchy-vimified
+return {
+  submaps = {},
+  options = {
+    absorb_defaults = true,
+    hud_breadcrumb = true,
+  },
+}
+EOF
+  fi
+
+  echo ":: Adding entry '$key' ($label) to submap '$submap'..."
+  # Use python or inline script to insert entry into declarative Lua table cleanly
+  python3 -c "
+import re, sys
+
+path = '$CONFIG_FILE'
+with open(path, 'r') as f:
+    content = f.read()
+
+submap_name = '$submap'
+trigger = '$trigger' or ('ALT + ' + submap_name[0].upper())
+key = '$key'
+label = '$label'
+cmd = '''$cmd'''
+
+new_entry = f'        {{ key = \"{key}\", label = \"{label}\", cmd = \"{cmd}\" }},\n'
+
+# Check if submap already exists
+pattern = rf'name\s*=\s*[\"\'{submap_name}[\"\']'
+if re.search(pattern, content):
+    # Insert entry inside existing entries table
+    submap_match = re.search(rf'(name\s*=\s*[\"\'{submap_name}[\"\'].*?entries\s*=\s*\{{)', content, re.DOTALL)
+    if submap_match:
+        pos = submap_match.end()
+        content = content[:pos] + '\n' + new_entry + content[pos:]
+else:
+    # Append new submap to submaps table
+    new_submap = f'''
+    {{
+      name = \"{submap_name}\",
+      trigger = \"{trigger}\",
+      entries = {{
+{new_entry}      }},
+    }},'''
+    submaps_pos = re.search(r'submaps\s*=\s*\{', content)
+    if submaps_pos:
+        pos = submaps_pos.end()
+        content = content[:pos] + new_submap + content[pos:]
+
+with open(path, 'w') as f:
+    f.write(content)
+"
+  echo -e "\033[32m✔ Added to $CONFIG_FILE\033[0m"
+  cmd_reload
+}
+
+# Main command dispatch
+case "${1:-}" in
+  list)
+    shift
+    cmd_list "$@"
+    ;;
+  validate)
+    cmd_validate
+    ;;
+  reload)
+    cmd_reload
+    ;;
+  add)
+    shift
+    cmd_add "$@"
+    ;;
+  version|-v|--version)
+    echo "omarchy-vimified v${VERSION}"
+    ;;
+  help|-h|--help|"")
+    usage
+    ;;
+  *)
+    echo "Unknown command: $1"
+    usage
+    exit 1
+    ;;
+esac

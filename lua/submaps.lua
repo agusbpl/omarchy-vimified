@@ -16,6 +16,23 @@ local function get_core()
   return require("core")
 end
 
+-- Resolve config_loader module
+local function get_config_loader()
+  local info = debug.getinfo(1, "S")
+  if info and info.source and info.source:sub(1, 1) == "@" then
+    local dir = info.source:sub(2):match("(.*/)") or "./"
+    local path = dir .. "config_loader.lua"
+    local f = io.open(path, "r")
+    if f then
+      f:close()
+      return dofile(path)
+    end
+  end
+  local ok, mod = pcall(require, "config_loader")
+  if ok then return mod end
+  return nil
+end
+
 local core = get_core()
 local hl = _G.hl
 local home = os.getenv("HOME") or ""
@@ -46,14 +63,19 @@ function M.setup_standard_submaps()
     submap_cmd("a", "Audio Settings", "omarchy-shell shell toggle omarchy.audio")
     submap_cmd("p", "Clipboard History", "omarchy-shell shell toggle omarchy.clipboard")
     submap_cmd("q", "Shutdown", "shutdown now")
+    submap_cmd("n", "Nightlight Toggle", "omarchy-toggle-nightlight")
+    submap_cmd("i", "Idle Lock Toggle", "omarchy-toggle-idle")
+    submap_cmd("z", "Zoom Cursor", "hyprctl keyword cursor:zoom_factor 2")
+    submap_cmd("d", "Display Panel", "omarchy-shell shell toggle omarchy.display")
+    submap_cmd("t", "Activity Monitor", "uwsm-app -- xdg-terminal-exec -e btop")
+    submap_cmd("x", "Lock Screen", "omarchy-system-lock")
+    submap_cmd("k", "Power Panel", "omarchy-shell shell toggle omarchy.power")
 
     hl.bind("v", function()
-      show_submap_cheatsheet("Volume")
-      hl.dispatch(hl.dsp.submap("Volume"))
+      core.enter_child_submap("System", "Volume")
     end)
     hl.bind("l", function()
-      show_submap_cheatsheet("Brightness")
-      hl.dispatch(hl.dsp.submap("Brightness"))
+      core.enter_child_submap("System", "Brightness")
     end)
     hl.bind("ESCAPE", reset_submap)
   end)
@@ -78,8 +100,6 @@ function M.setup_standard_submaps()
     submap_cmd("g", "PostgreSQL Docs", "omarchy-launch-webapp 'https://www.postgresql.org/docs/'")
     submap_cmd("d", "Data Science Menu", "omarchy-menu datascience")
     submap_cmd("a", "Airflow Docs", "omarchy-launch-webapp 'https://airflow.apache.org/docs/apache-airflow/stable/index.html'")
-    submap_cmd("r", "Relax RelAlg", "omarchy-launch-webapp 'https://dbis-uibk.github.io/relax/calc/local/misc/local/0'")
-    submap_cmd("h", "OpenStax Biology", "omarchy-launch-webapp 'https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks'")
     submap_cmd("j", "JupyterLab Docs", "omarchy-launch-webapp 'https://jupyterlab.readthedocs.io/en/stable/'")
     submap_cmd("k", "Scikit-Learn Docs", "omarchy-launch-webapp 'https://scikit-learn.org/stable/'")
     submap_cmd("f", "PyTorch Docs", "omarchy-launch-webapp 'https://pytorch.org/docs/stable/index.html'")
@@ -137,7 +157,7 @@ function M.setup_standard_submaps()
     submap_cmd("a", "Google Gemini", "omarchy-launch-webapp 'https://gemini.google.com/app'")
     submap_cmd("c", "Claude AI", "omarchy-launch-webapp 'https://claude.ai/'")
     submap_cmd("g", "ChatGPT", "omarchy-launch-webapp 'https://chatgpt.com/'")
-    submap_cmd("m", "Google Gemini", "omarchy-launch-webapp 'https://gemini.google.com/app'")
+    submap_cmd("m", "Mistral AI", "omarchy-launch-webapp 'https://chat.mistral.ai/'")
     submap_cmd("p", "Perplexity AI", "omarchy-launch-webapp 'https://www.perplexity.ai/'")
     submap_cmd("d", "DeepSeek Chat", "omarchy-launch-webapp 'https://chat.deepseek.com/'")
     submap_cmd("k", "Kimi AI", "omarchy-launch-webapp 'https://www.kimi.com/'")
@@ -177,6 +197,10 @@ function M.setup_standard_submaps()
     submap_cmd("h", "Hardware Menu", "omarchy-menu toggle hardware")
     submap_cmd("v", "Toggle Top Bar", "omarchy-shell -q bar toggle")
     submap_cmd("k", "Keybindings Menu", "omarchy-menu-keybindings")
+    submap_cmd("c", "Capture Menu", "omarchy-menu toggle trigger.capture")
+    submap_cmd("r", "Herdr Keybindings", "omarchy-menu-herdr-keybindings")
+    submap_cmd("q", "Calculator", "omacalc")
+    submap_cmd("p", "Power Panel", "omarchy-shell shell toggle omarchy.power")
     hl.bind("ESCAPE", reset_submap)
   end)
   bind_submap("M", "Menus")
@@ -241,6 +265,49 @@ function M.setup_standard_submaps()
     end, { repeat_trigger = true })
     hl.bind("ESCAPE", reset_submap)
   end)
+
+  -- ---------------------------------------------------------
+  -- 11b. ALT + F -> Frames (Unified Window Management)
+  -- ---------------------------------------------------------
+  hl.define_submap("Frames", function()
+    -- Fullscreen variants
+    hl.bind("f", function()
+      reset_submap()
+      hl.exec_cmd("hyprctl dispatch fullscreen 0")
+    end, { description = "Fullscreen" })
+    hl.bind("F", function()
+      reset_submap()
+      hl.exec_cmd("hyprctl dispatch fullscreen 1")
+    end, { description = "Tiled Fullscreen" })
+    hl.bind("m", function()
+      reset_submap()
+      hl.exec_cmd("hyprctl dispatch fullscreen 2")
+    end, { description = "Maximized" })
+
+    -- Window state toggles
+    submap_cmd("t", "Toggle Float/Tile", "hyprctl dispatch togglefloating")
+    submap_cmd("p", "Pseudo Tile", "hyprctl dispatch pseudo")
+    hl.bind("o", function()
+      reset_submap()
+      hl.exec_cmd("hyprctl dispatch togglefloating")
+      hl.exec_cmd("hyprctl dispatch pin")
+    end, { description = "Pop Out (Float & Pin)" })
+    submap_cmd("s", "Toggle Split", "hyprctl dispatch togglesplit")
+
+    -- Window groups
+    submap_cmd("g", "Toggle Group", "hyprctl dispatch togglegroup")
+    submap_cmd("G", "Move Out of Group", "hyprctl dispatch moveoutofgroup")
+
+    -- Width presets
+    submap_cmd("w", "Save Width", "omarchy-hyprland-window-width save")
+    submap_cmd("r", "Restore Width", "omarchy-hyprland-window-width restore")
+
+    -- System Lock (restored — was displaced from SUPER+CTRL+L)
+    submap_cmd("l", "Lock Screen", "omarchy-system-lock")
+
+    hl.bind("ESCAPE", reset_submap)
+  end)
+  bind_submap("F", "Frames")
 
   -- ---------------------------------------------------------
   -- 11. Window Resize (Quick Adjust) -> ALT + D
@@ -326,9 +393,13 @@ function M.setup_hub()
   end)
 end
 
---- Complete setup: standard submaps -> user custom config -> master hub
+--- Complete setup: standard submaps -> declarative config -> imperative custom config -> master hub
 function M.setup()
   M.setup_standard_submaps()
+  local loader = get_config_loader()
+  if loader and loader.load_declarative_config then
+    loader.load_declarative_config(core)
+  end
   M.load_user_custom_config()
   M.setup_hub()
 end

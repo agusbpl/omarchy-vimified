@@ -17,7 +17,8 @@ var SVG_ICONS = {
   "TTS": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%201a3%203%200%200%200-3%203v8a3%203%200%200%200%206%200V4a3%203%200%200%200-3-3z%22%3E%3C/path%3E%3Cpath%20d%3D%22M19%2010v2a7%207%200%200%201-14%200v-2%22%3E%3C/path%3E%3Cline%20x1%3D%2212%22%20y1%3D%2219%22%20x2%3D%2212%22%20y2%3D%2223%22%3E%3C/line%3E%3Cline%20x1%3D%228%22%20y1%3D%2223%22%20x2%3D%2216%22%20y2%3D%2223%22%3E%3C/line%3E%3C/svg%3E",
   "Volume": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolygon%20points%3D%2211%205%206%209%202%209%202%2015%206%2015%2011%2019%2011%205%22%3E%3C/polygon%3E%3Cpath%20d%3D%22M19.07%204.93a10%2010%200%200%201%200%2014.14M15.54%208.46a5%205%200%200%201%200%207.07%22%3E%3C/path%3E%3C/svg%3E",
   "Brightness": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%225%22%3E%3C/circle%3E%3Cline%20x1%3D%2212%22%20y1%3D%221%22%20x2%3D%2212%22%20y2%3D%223%22%3E%3C/line%3E%3Cline%20x1%3D%2212%22%20y1%3D%2221%22%20x2%3D%2212%22%20y2%3D%2223%22%3E%3C/line%3E%3Cline%20x1%3D%224.22%22%20y1%3D%224.22%22%20x2%3D%225.64%22%20y2%3D%225.64%22%3E%3C/line%3E%3Cline%20x1%3D%2218.36%22%20y1%3D%2218.36%22%20x2%3D%2219.78%22%20y2%3D%2219.78%22%3E%3C/line%3E%3Cline%20x1%3D%221%22%20y1%3D%2212%22%20x2%3D%223%22%20y2%3D%2212%22%3E%3C/line%3E%3Cline%20x1%3D%2221%22%20y1%3D%2212%22%20x2%3D%2223%22%20y2%3D%2212%22%3E%3C/line%3E%3Cline%20x1%3D%224.22%22%20y1%3D%2219.78%22%20x2%3D%225.64%22%20y2%3D%2218.36%22%3E%3C/line%3E%3Cline%20x1%3D%2218.36%22%20y1%3D%225.64%22%20x2%3D%2219.78%22%20y2%3D%224.22%22%3E%3C/line%3E%3C/svg%3E",
-  "Resize": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15%203h6v6M9%2021H3v-6M21%203l-7%207M3%2021l7-7%22%3E%3C/path%3E%3C/svg%3E"
+  "Resize": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15%203h6v6M9%2021H3v-6M21%203l-7%207M3%2021l7-7%22%3E%3C/path%3E%3C/svg%3E",
+  "Frames": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%2220%22%20height%3D%2214%22%20rx%3D%222%22%20ry%3D%222%22%3E%3C/rect%3E%3Cline%20x1%3D%228%22%20y1%3D%2221%22%20x2%3D%2216%22%20y2%3D%2221%22%3E%3C/line%3E%3Cline%20x1%3D%2212%22%20y1%3D%2217%22%20x2%3D%2212%22%20y2%3D%2221%22%3E%3C/line%3E%3C/svg%3E"
 };
 
 var DEFAULT_SUBMAPS = {
@@ -33,6 +34,7 @@ var DEFAULT_SUBMAPS = {
       ["o", "+Office"],
       ["i", "+AI"],
       ["n", "+Navigation"],
+      ["f", "+Frames (Windows)..."],
       ["d", "+Resize (Dims)..."],
       ["u", "+UNLP"],
       ["m", "+Menus"],
@@ -58,6 +60,13 @@ var DEFAULT_SUBMAPS = {
       ["s", "Screenshot"],
       ["a", "Audio Settings"],
       ["p", "Clipboard History"],
+      ["n", "Nightlight Toggle"],
+      ["i", "Idle Lock Toggle"],
+      ["z", "Zoom Cursor"],
+      ["d", "Display Panel"],
+      ["t", "Activity Monitor"],
+      ["x", "Lock Screen"],
+      ["k", "Power Panel"],
       ["q", "Shutdown System"],
       ["v", "+Volume Control..."],
       ["l", "+Brightness Control..."]
@@ -84,8 +93,6 @@ var DEFAULT_SUBMAPS = {
       ["g", "PostgreSQL Docs"],
       ["d", "Data Science Menu"],
       ["a", "Airflow Docs"],
-      ["r", "Relax RelAlg"],
-      ["h", "OpenStax Biology"],
       ["j", "JupyterLab Docs"],
       ["k", "Scikit-Learn Docs"],
       ["f", "PyTorch Docs"],
@@ -143,7 +150,7 @@ var DEFAULT_SUBMAPS = {
       ["a", "Google Gemini"],
       ["c", "Claude AI"],
       ["g", "ChatGPT"],
-      ["m", "Google Gemini"],
+      ["m", "Mistral AI"],
       ["p", "Perplexity AI"],
       ["d", "DeepSeek Chat"],
       ["k", "Kimi AI"],
@@ -177,7 +184,9 @@ var DEFAULT_SUBMAPS = {
       ["a", "AU24 Económicas"],
       ["l", "Cátedras LINTI"],
       ["i", "IDEAS Informática"],
-      ["m", "Asignaturas Moodle"]
+      ["m", "Asignaturas Moodle"],
+      ["r", "Relax RelAlg"],
+      ["h", "OpenStax Biology"]
     ]
   },
   "Menus": {
@@ -194,7 +203,11 @@ var DEFAULT_SUBMAPS = {
       ["s", "Share Menu"],
       ["h", "Hardware Menu"],
       ["v", "Toggle Top Bar"],
-      ["k", "Keybindings Menu"]
+      ["k", "Keybindings Menu"],
+      ["c", "Capture Menu"],
+      ["r", "Herdr Keybindings"],
+      ["q", "Calculator"],
+      ["p", "Power Panel"]
     ]
   },
   "Reminders": {
@@ -256,6 +269,26 @@ var DEFAULT_SUBMAPS = {
       ["s", "Save Width"],
       ["r", "Restore Width"]
     ]
+  },
+  "Frames": {
+    "icon": "🖥",
+    "iconSvg": SVG_ICONS["Frames"],
+    "title": "Frames",
+    "tag": "SUBMAP [ALT + F]",
+    "entries": [
+      ["f", "Fullscreen"],
+      ["F", "Tiled Fullscreen"],
+      ["m", "Maximized (Full Width)"],
+      ["t", "Toggle Float/Tile"],
+      ["p", "Pseudo Tile"],
+      ["o", "Pop Out (Float & Pin)"],
+      ["s", "Toggle Split"],
+      ["g", "Toggle Group"],
+      ["G", "Move Out of Group"],
+      ["w", "Save Width"],
+      ["r", "Restore Width"],
+      ["l", "Lock Screen"]
+    ]
   }
 };
 
@@ -294,6 +327,7 @@ function normalizeSubmap(name, raw) {
     tag: raw.tag || ("SUBMAP [" + name.toUpperCase() + "]"),
     icon: icon,
     iconSvg: iconSvg,
+    breadcrumb: raw.breadcrumb || null,
     entries: Array.isArray(raw.entries) ? raw.entries : []
   };
 }

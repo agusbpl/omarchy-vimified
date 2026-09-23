@@ -22,6 +22,8 @@ hl.define_submap("UNLP", function()
   vim.submap_cmd("l", "Cátedras LINTI", "omarchy-launch-webapp 'https://catedras.linti.unlp.edu.ar/index.php?'")
   vim.submap_cmd("i", "IDEAS Informática", "omarchy-launch-webapp 'https://ideas.info.unlp.edu.ar/'")
   vim.submap_cmd("m", "Asignaturas Moodle", "omarchy-launch-webapp 'https://asignaturas.info.unlp.edu.ar/my/'")
+  vim.submap_cmd("r", "Relax RelAlg", "omarchy-launch-webapp 'https://dbis-uibk.github.io/relax/calc/local/misc/local/0'")
+  vim.submap_cmd("h", "OpenStax Biology", "omarchy-launch-webapp 'https://openstax.org/books/biology-2e/pages/2-1-atoms-isotopes-ions-and-molecules-the-building-blocks'")
 
   -- Salir con ESCAPE
   hl.bind("ESCAPE", vim.reset_submap)

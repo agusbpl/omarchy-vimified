@@ -18,6 +18,7 @@ Item {
 
   property bool opened: false
   property string currentSubmapName: "Hub"
+  property string currentBreadcrumb: ""
   property var currentSubmap: SubmapsModel.getSubmap("Hub")
 
   // Auto-hide after 20s of inactivity
@@ -48,6 +49,7 @@ Item {
 
   function open(payloadJson) {
     var name = "Hub";
+    root.currentBreadcrumb = "";
     var dynamicOverrides = null;
 
     if (typeof payloadJson === "string") {
@@ -56,17 +58,23 @@ Item {
         if (parsed && typeof parsed === "object") {
           if (parsed.submap) name = String(parsed.submap);
           if (parsed.submaps) dynamicOverrides = parsed.submaps;
+          if (parsed.breadcrumb) root.currentBreadcrumb = String(parsed.breadcrumb);
+          else root.currentBreadcrumb = "";
         } else if (typeof parsed === "string" && parsed.trim().length > 0) {
           name = parsed.trim();
+          root.currentBreadcrumb = "";
         }
       } catch (e) {
         if (payloadJson && payloadJson.trim().length > 0) {
           name = payloadJson.trim();
         }
+        root.currentBreadcrumb = "";
       }
     } else if (payloadJson && typeof payloadJson === "object") {
       if (payloadJson.submap) name = String(payloadJson.submap);
       if (payloadJson.submaps) dynamicOverrides = payloadJson.submaps;
+      if (payloadJson.breadcrumb) root.currentBreadcrumb = String(payloadJson.breadcrumb);
+      else root.currentBreadcrumb = "";
     }
 
     root.currentSubmapName = name;
@@ -195,6 +203,18 @@ Item {
               anchors.verticalCenter: parent.verticalCenter
             }
           }
+        }
+
+        // Breadcrumb trail (for nested submaps)
+        Text {
+          visible: root.currentBreadcrumb !== ""
+          text: root.currentBreadcrumb
+          color: "#566b88"
+          font.family: root.monoFont
+          font.pixelSize: 10
+          font.italic: true
+          renderType: Text.NativeRendering
+          topPadding: 4
         }
 
         Item { width: 1; height: 8 }

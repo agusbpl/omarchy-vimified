@@ -10,6 +10,7 @@ TARGET_DIR="$HOME/.config/omarchy/plugins/omarchy-vimified"
 HYPR_CONFIG_DIR="$HOME/.config/hypr"
 BINDINGS_LUA="$HYPR_CONFIG_DIR/bindings.lua"
 CUSTOM_LUA="$HYPR_CONFIG_DIR/omarchy-vimified-custom.lua"
+CONFIG_LUA="$HYPR_CONFIG_DIR/omarchy-vimified-config.lua"
 
 echo -e "\033[1;34m:: Installing omarchy-vimified...\033[0m"
 
@@ -67,14 +68,29 @@ else
   echo "  dofile(os.getenv(\"HOME\") .. \"/.config/omarchy/plugins/omarchy-vimified/lua/init.lua\")"
 fi
 
-# 5. Template User Custom Configuration if missing
+# 5. Template User Custom Configurations if missing
 if [ ! -f "$CUSTOM_LUA" ]; then
   echo "-> Creating starter custom config: $CUSTOM_LUA..."
   cp "$TARGET_DIR/lua/custom.lua.example" "$CUSTOM_LUA"
   echo -e "\033[32m✔ Starter custom config created.\033[0m"
 fi
 
-# 6. Reload Hyprland
+if [ ! -f "$CONFIG_LUA" ]; then
+  echo "-> Creating starter declarative config: $CONFIG_LUA..."
+  cp "$TARGET_DIR/lua/config.lua.example" "$CONFIG_LUA"
+  echo -e "\033[32m✔ Starter declarative config created.\033[0m"
+fi
+
+# 6. Install omarchy-vimified CLI tool
+mkdir -p "$HOME/.local/bin"
+if [ -f "$TARGET_DIR/bin/omarchy-vimified" ]; then
+  echo "-> Installing CLI to $HOME/.local/bin/omarchy-vimified..."
+  cp "$TARGET_DIR/bin/omarchy-vimified" "$HOME/.local/bin/omarchy-vimified"
+  chmod +x "$HOME/.local/bin/omarchy-vimified"
+  echo -e "\033[32m✔ CLI installed to $HOME/.local/bin/omarchy-vimified\033[0m"
+fi
+
+# 7. Reload Hyprland
 if command -v hyprctl >/dev/null 2>&1; then
   echo "-> Reloading Hyprland configuration..."
   hyprctl reload >/dev/null 2>&1 || true

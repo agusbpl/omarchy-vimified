@@ -96,9 +96,58 @@ assert_true(vim.core ~= nil, "core module exported")
 assert_true(vim.submaps ~= nil, "submaps module exported")
 assert_eq(_G.omarchy_vimified, vim.core, "_G.omarchy_vimified global exposed")
 
--- Test 2: Verify Collision Unbinds
-print("\n[2] Verifying Omarchy Collision Unbinds...")
-local expected_unbinds = { "SUPER + J", "SUPER + K", "SUPER + L", "SUPER + CTRL + L" }
+-- Test 2: Verify Collision and Absorbed Omarchy Defaults Unbinds
+print("\n[2] Verifying Omarchy Collision and Absorbed Defaults Unbinds...")
+local expected_unbinds = {
+  -- Core HJKL collisions
+  "SUPER + J",
+  "SUPER + K",
+  "SUPER + L",
+  "SUPER + CTRL + L",
+  -- Window management absorbed into Frames
+  "SUPER + F",
+  "SUPER + CTRL + F",
+  "SUPER + ALT + F",
+  "SUPER + T",
+  "SUPER + P",
+  "SUPER + O",
+  "SUPER + G",
+  "SUPER + ALT + G",
+  -- App launchers absorbed into contextual submaps
+  "SUPER + SHIFT + RETURN",
+  "SUPER + SHIFT + B",
+  "SUPER + SHIFT + F",
+  "SUPER + SHIFT + N",
+  "SUPER + SHIFT + M",
+  "SUPER + SHIFT + D",
+  "SUPER + SHIFT + G",
+  "SUPER + SHIFT + O",
+  "SUPER + SHIFT + W",
+  "SUPER + SHIFT + A",
+  "SUPER + SHIFT + C",
+  "SUPER + SHIFT + E",
+  "SUPER + SHIFT + Y",
+  "SUPER + SHIFT + P",
+  "SUPER + SHIFT + S",
+  "SUPER + SHIFT + X",
+  -- Utility panels absorbed into System/Menus
+  "SUPER + CTRL + E",
+  "SUPER + CTRL + C",
+  "SUPER + CTRL + O",
+  "SUPER + CTRL + H",
+  "SUPER + CTRL + A",
+  "SUPER + CTRL + B",
+  "SUPER + CTRL + D",
+  "SUPER + CTRL + W",
+  "SUPER + CTRL + P",
+  "SUPER + CTRL + S",
+  "SUPER + CTRL + Q",
+  "SUPER + CTRL + T",
+  "SUPER + CTRL + N",
+  "SUPER + CTRL + I",
+  "SUPER + CTRL + Z",
+}
+
 for _, key in ipairs(expected_unbinds) do
   local found = false
   for _, unbind in ipairs(mock_unbinds) do
@@ -107,7 +156,7 @@ for _, key in ipairs(expected_unbinds) do
       break
     end
   end
-  assert_true(found, "Unbound collision: " .. key)
+  assert_true(found, "Unbound: " .. key)
 end
 
 -- Test 3: Verify HJKL Navigation Binds
@@ -135,7 +184,7 @@ assert_true(find_bind("SUPER + CTRL + J") ~= nil, "Remapped SUPER + CTRL + J (To
 assert_true(find_bind("SUPER + CTRL + K") ~= nil, "Remapped SUPER + CTRL + K (Keybindings Menu)")
 assert_true(find_bind("SUPER + CTRL + L") ~= nil, "Remapped SUPER + CTRL + L (Workspace Layout)")
 
--- Test 4: Verify Omarchy Shell HUD Helpers
+-- Test 4: Verify Omarchy Shell HUD Helpers and Breadcrumb
 print("\n[4] Verifying Omarchy Shell HUD IPC Helpers...")
 mock_exec_cmds = {}
 mock_dispatches = {}
@@ -146,6 +195,16 @@ assert_eq(
   "omarchy-shell shell summon omarchy-vimified '{\"submap\":\"System\"}'",
   "show_submap_cheatsheet summons HUD with correct JSON payload"
 )
+
+mock_exec_cmds = {}
+mock_dispatches = {}
+vim.core.enter_child_submap("System", "Volume")
+assert_eq(
+  mock_exec_cmds[1],
+  "omarchy-shell shell summon omarchy-vimified '{\"submap\":\"Volume\",\"breadcrumb\":\"System > Volume\"}'",
+  "enter_child_submap summons HUD with breadcrumb payload"
+)
+assert_eq(mock_dispatches[1].name, "Volume", "enter_child_submap dispatches child submap")
 
 mock_exec_cmds = {}
 vim.core.dismiss_cheatsheet()
@@ -171,6 +230,7 @@ local expected_submaps = {
   "Office",
   "IA",
   "NAV",
+  "Frames",
   "Resize",
   "Menus",
   "Reminders",
@@ -192,6 +252,7 @@ assert_true(find_bind("ALT + p") ~= nil, "Programming trigger: ALT + p")
 assert_true(find_bind("ALT + o") ~= nil, "Office trigger: ALT + o")
 assert_true(find_bind("ALT + i") ~= nil, "IA trigger: ALT + i")
 assert_true(find_bind("ALT + n") ~= nil, "NAV trigger: ALT + n")
+assert_true(find_bind("ALT + f") ~= nil, "Frames trigger: ALT + f")
 assert_true(find_bind("ALT + d") ~= nil, "Resize trigger: ALT + d")
 assert_true(find_bind("ALT + m") ~= nil, "Menus trigger: ALT + m")
 assert_true(find_bind("ALT + r") ~= nil, "Reminders trigger: ALT + r")
@@ -203,6 +264,24 @@ local initial_count = #vim.core.hub_targets
 vim.core.register_hub_target({ "u", "U" }, "UNLP")
 assert_eq(#vim.core.hub_targets, initial_count + 1, "Added custom target to Hub")
 assert_eq(vim.core.hub_targets[#vim.core.hub_targets].name, "UNLP", "Custom target name matches")
+
+-- Test 8: Verify config_loader serialization
+print("\n[8] Verifying config_loader serialization...")
+local config_loader_path = debug.getinfo(1, "S").source:sub(2):match("(.*/)") .. "../lua/config_loader.lua"
+local cfg_loader = dofile(config_loader_path)
+assert_true(cfg_loader ~= nil, "config_loader loaded successfully")
+assert_true(type(cfg_loader.serialize_submaps_to_json) == "function", "serialize_submaps_to_json exported")
+
+local test_json = cfg_loader.serialize_submaps_to_json({
+  TestMap = {
+    icon = "⚡",
+    title = "Test Map",
+    tag = "SUBMAP [ALT + X]",
+    entries = { { "a", "Action A" } },
+  },
+})
+assert_true(test_json:find('"TestMap"', 1, true) ~= nil, "Serialized JSON contains submap name")
+assert_true(test_json:find('"Action A"', 1, true) ~= nil, "Serialized JSON contains entry label")
 
 -- Summary
 print("\n===========================================")
