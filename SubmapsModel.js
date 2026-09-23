@@ -33,7 +33,7 @@ var DEFAULT_SUBMAPS = {
       ["o", "+Office"],
       ["i", "+AI"],
       ["n", "+Navigation"],
-      ["w", "+Resize..."],
+      ["d", "+Resize (Dims)..."],
       ["u", "+UNLP"],
       ["m", "+Menus"],
       ["r", "+Reminders"],
@@ -247,7 +247,7 @@ var DEFAULT_SUBMAPS = {
     "icon": "📐",
     "iconSvg": SVG_ICONS["Resize"],
     "title": "Window Resize",
-    "tag": "QUICK ADJUST",
+    "tag": "SUBMAP [ALT + D]",
     "entries": [
       ["h / l", "Width (-/+ 30px)"],
       ["j / k", "Height (+/- 30px)"],

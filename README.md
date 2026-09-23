@@ -137,8 +137,8 @@ Press `ALT + <Key>` to enter a modal submap. The Which-Key HUD will immediately 
 
 | Trigger | Submap Name | Content & Actions |
 | :--- | :--- | :--- |
-| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `w`, etc.) |
-| `ALT + W` | **📐 Window Resize** | Modal quick adjustment (`h`/`l` width, `j`/`k` height, `H`/`L`/`J`/`K` fast steps, `s`/`r` save & restore width) |
+| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `d`, etc.) |
+| `ALT + D` | **📐 Window Resize** | Modal quick adjustment (**D**imensions: `h`/`l` width, `j`/`k` height, `H`/`L`/`J`/`K` fast steps, `s`/`r` save & restore width) |
 | `ALT + S` | **⚙️ System & Hardware** | Nautilus, Btop, config editing, WiFi, Bluetooth, Camera, Screenshot, Screen recording, Shutdown |
 | `ALT + P` | **💻 Programming & Dev** | Antigravity AI, Neovim, VSCode, Docker, LazyGit, GitHub, DB managers, Terminal scratchpads |
 | `ALT + L` | **📚 Learning & Data** | Python, Pandas, Polars, PyTorch, SQL, Jupyter, Hugging Face, documentation and local cheatsheets |

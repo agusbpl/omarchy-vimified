@@ -277,7 +277,7 @@ function M.setup_standard_submaps()
     hl.bind("RETURN", reset_submap)
     hl.bind("ESCAPE", reset_submap)
   end)
-  bind_submap("W", "Resize")
+  bind_submap("D", "Resize")
 end
 
 --- Load user custom configuration if it exists (~/.config/hypr/omarchy-vimified-custom.lua)
