@@ -118,6 +118,10 @@ cd omarchy-vimified
 | `SUPER + SHIFT + J` | **Swap Down** | Swap active window with the one below |
 | `SUPER + SHIFT + K` | **Swap Up** | Swap active window with the one above |
 | `SUPER + SHIFT + L` | **Swap Right** | Swap active window with the one on the right |
+| `SUPER + ALT + H` | **Resize Left** | Shrink window width (-30px, continuous repeat) |
+| `SUPER + ALT + L` | **Resize Right** | Expand window width (+30px, continuous repeat) |
+| `SUPER + ALT + J` | **Resize Down** | Expand window height (+30px, continuous repeat) |
+| `SUPER + ALT + K` | **Resize Up** | Shrink window height (-30px, continuous repeat) |
 
 > [!NOTE]
 > **Conflict Resolution:** Omarchy defaults that previously clashed with `SUPER + J/K/L` are safely remapped to:
@@ -133,7 +137,8 @@ Press `ALT + <Key>` to enter a modal submap. The Which-Key HUD will immediately 
 
 | Trigger | Submap Name | Content & Actions |
 | :--- | :--- | :--- |
-| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `m`, etc.) |
+| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `w`, etc.) |
+| `ALT + W` | **📐 Window Resize** | Modal quick adjustment (`h`/`l` width, `j`/`k` height, `H`/`L`/`J`/`K` fast steps, `s`/`r` save & restore width) |
 | `ALT + S` | **⚙️ System & Hardware** | Nautilus, Btop, config editing, WiFi, Bluetooth, Camera, Screenshot, Screen recording, Shutdown |
 | `ALT + P` | **💻 Programming & Dev** | Antigravity AI, Neovim, VSCode, Docker, LazyGit, GitHub, DB managers, Terminal scratchpads |
 | `ALT + L` | **📚 Learning & Data** | Python, Pandas, Polars, PyTorch, SQL, Jupyter, Hugging Face, documentation and local cheatsheets |

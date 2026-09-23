@@ -15,6 +15,7 @@ M.hub_targets = {
   { keys = { "o", "O" }, name = "Office" },
   { keys = { "i", "I" }, name = "IA" },
   { keys = { "n", "N" }, name = "NAV" },
+  { keys = { "w", "W" }, name = "Resize" },
   { keys = { "m", "M" }, name = "Menus" },
   { keys = { "r", "R" }, name = "Reminders" },
   { keys = { "t", "T" }, name = "TTS" },
@@ -106,6 +107,20 @@ function M.setup_navigation()
   o.bind("SUPER + CTRL + J", "Toggle window split", hl.dsp.layout("togglesplit"))
   o.bind("SUPER + CTRL + K", "Keybindings menu", "omarchy-menu-keybindings")
   o.bind("SUPER + CTRL + L", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+
+  -- 5. Direct Window Resizing (SUPER + ALT + H/J/K/L)
+  local function direct_resize(dx, dy)
+    if hl.dsp and hl.dsp.window and hl.dsp.window.resize then
+      return hl.dsp.window.resize({ x = dx, y = dy, relative = true })
+    else
+      return function() hl.exec_cmd(string.format("hyprctl dispatch resizeactive %d %d", dx, dy)) end
+    end
+  end
+
+  o.bind("SUPER + ALT + H", "Shrink window width", direct_resize(-30, 0), { repeat_trigger = true })
+  o.bind("SUPER + ALT + L", "Expand window width", direct_resize(30, 0), { repeat_trigger = true })
+  o.bind("SUPER + ALT + J", "Expand window height", direct_resize(0, 30), { repeat_trigger = true })
+  o.bind("SUPER + ALT + K", "Shrink window height", direct_resize(0, -30), { repeat_trigger = true })
 end
 
 -- Expose to global namespace for custom user configs and modules

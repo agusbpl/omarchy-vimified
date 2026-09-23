@@ -60,6 +60,9 @@ local hl = {
       swap = function(opts)
         return { type = "window.swap", opts = opts }
       end,
+      resize = function(opts)
+        return { type = "window.resize", opts = opts }
+      end,
     },
     layout = function(name)
       return { type = "layout", name = name }
@@ -132,6 +135,11 @@ assert_true(find_bind("SUPER + CTRL + J") ~= nil, "Remapped SUPER + CTRL + J (To
 assert_true(find_bind("SUPER + CTRL + K") ~= nil, "Remapped SUPER + CTRL + K (Keybindings Menu)")
 assert_true(find_bind("SUPER + CTRL + L") ~= nil, "Remapped SUPER + CTRL + L (Workspace Layout)")
 
+assert_true(find_bind("SUPER + ALT + H") ~= nil, "Bound SUPER + ALT + H (Direct Resize Left)")
+assert_true(find_bind("SUPER + ALT + J") ~= nil, "Bound SUPER + ALT + J (Direct Resize Down)")
+assert_true(find_bind("SUPER + ALT + K") ~= nil, "Bound SUPER + ALT + K (Direct Resize Up)")
+assert_true(find_bind("SUPER + ALT + L") ~= nil, "Bound SUPER + ALT + L (Direct Resize Right)")
+
 -- Test 4: Verify Omarchy Shell HUD Helpers
 print("\n[4] Verifying Omarchy Shell HUD IPC Helpers...")
 mock_exec_cmds = {}
@@ -168,6 +176,7 @@ local expected_submaps = {
   "Office",
   "IA",
   "NAV",
+  "Resize",
   "Menus",
   "Reminders",
   "TTS",
@@ -188,6 +197,7 @@ assert_true(find_bind("ALT + p") ~= nil, "Programming trigger: ALT + p")
 assert_true(find_bind("ALT + o") ~= nil, "Office trigger: ALT + o")
 assert_true(find_bind("ALT + i") ~= nil, "IA trigger: ALT + i")
 assert_true(find_bind("ALT + n") ~= nil, "NAV trigger: ALT + n")
+assert_true(find_bind("ALT + w") ~= nil, "Resize trigger: ALT + w")
 assert_true(find_bind("ALT + m") ~= nil, "Menus trigger: ALT + m")
 assert_true(find_bind("ALT + r") ~= nil, "Reminders trigger: ALT + r")
 assert_true(find_bind("ALT + t") ~= nil, "TTS trigger: ALT + t")

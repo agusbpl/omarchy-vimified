@@ -241,6 +241,43 @@ function M.setup_standard_submaps()
     end, { repeat_trigger = true })
     hl.bind("ESCAPE", reset_submap)
   end)
+
+  -- ---------------------------------------------------------
+  -- 11. Window Resize (Quick Adjust) -> ALT + W
+  -- ---------------------------------------------------------
+  hl.define_submap("Resize", function()
+    local step = 30
+    local step_big = 90
+
+    local function do_resize(dx, dy)
+      if hl.dsp and hl.dsp.window and hl.dsp.window.resize then
+        hl.dispatch(hl.dsp.window.resize({ x = dx, y = dy, relative = true }))
+      else
+        hl.exec_cmd(string.format("hyprctl dispatch resizeactive %d %d", dx, dy))
+      end
+    end
+
+    -- Fine adjustments (h, j, k, l)
+    hl.bind("h", function() do_resize(-step, 0) end, { repeat_trigger = true })
+    hl.bind("l", function() do_resize(step, 0) end, { repeat_trigger = true })
+    hl.bind("j", function() do_resize(0, step) end, { repeat_trigger = true })
+    hl.bind("k", function() do_resize(0, -step) end, { repeat_trigger = true })
+
+    -- Fast / Coarse adjustments (H, J, K, L)
+    hl.bind("H", function() do_resize(-step_big, 0) end, { repeat_trigger = true })
+    hl.bind("L", function() do_resize(step_big, 0) end, { repeat_trigger = true })
+    hl.bind("J", function() do_resize(0, step_big) end, { repeat_trigger = true })
+    hl.bind("K", function() do_resize(0, -step_big) end, { repeat_trigger = true })
+
+    -- Save / Restore width presets
+    submap_cmd("s", "Save Width", "omarchy-hyprland-window-width save")
+    submap_cmd("r", "Restore Width", "omarchy-hyprland-window-width restore")
+
+    -- Exit submap
+    hl.bind("RETURN", reset_submap)
+    hl.bind("ESCAPE", reset_submap)
+  end)
+  bind_submap("W", "Resize")
 end
 
 --- Load user custom configuration if it exists (~/.config/hypr/omarchy-vimified-custom.lua)
