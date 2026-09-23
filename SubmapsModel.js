@@ -249,10 +249,10 @@ var DEFAULT_SUBMAPS = {
     "title": "Window Resize",
     "tag": "SUBMAP [ALT + D]",
     "entries": [
-      ["h / l", "Width (-/+ 30px)"],
-      ["j / k", "Height (+/- 30px)"],
-      ["H / L", "Width Fast (-/+ 90px)"],
-      ["J / K", "Height Fast (+/- 90px)"],
+      ["h / l", "Width Fine (-/+ 10px)"],
+      ["j / k", "Height Fine (+/- 10px)"],
+      ["H / L", "Width Fast (-/+ 30px)"],
+      ["J / K", "Height Fast (+/- 30px)"],
       ["s", "Save Width"],
       ["r", "Restore Width"]
     ]

@@ -243,31 +243,31 @@ function M.setup_standard_submaps()
   end)
 
   -- ---------------------------------------------------------
-  -- 11. Window Resize (Quick Adjust) -> ALT + W
+  -- 11. Window Resize (Quick Adjust) -> ALT + D
   -- ---------------------------------------------------------
   hl.define_submap("Resize", function()
-    local step = 30
-    local step_big = 90
+    local step = 10
+    local step_big = 30
 
-    local function do_resize(dx, dy)
+    local function resize_action(dx, dy)
       if hl.dsp and hl.dsp.window and hl.dsp.window.resize then
-        hl.dispatch(hl.dsp.window.resize({ x = dx, y = dy, relative = true }))
+        return hl.dsp.window.resize({ x = dx, y = dy, relative = true })
       else
-        hl.exec_cmd(string.format("hyprctl dispatch resizeactive %d %d", dx, dy))
+        return function() hl.exec_cmd(string.format("hyprctl dispatch resizeactive %d %d", dx, dy)) end
       end
     end
 
-    -- Fine adjustments (h, j, k, l)
-    hl.bind("h", function() do_resize(-step, 0) end, { repeat_trigger = true })
-    hl.bind("l", function() do_resize(step, 0) end, { repeat_trigger = true })
-    hl.bind("j", function() do_resize(0, step) end, { repeat_trigger = true })
-    hl.bind("k", function() do_resize(0, -step) end, { repeat_trigger = true })
+    -- Fine micro-adjustments (h, j, k, l): 10px
+    hl.bind("h", resize_action(-step, 0), { repeat_trigger = true })
+    hl.bind("l", resize_action(step, 0), { repeat_trigger = true })
+    hl.bind("j", resize_action(0, step), { repeat_trigger = true })
+    hl.bind("k", resize_action(0, -step), { repeat_trigger = true })
 
-    -- Fast / Coarse adjustments (H, J, K, L)
-    hl.bind("H", function() do_resize(-step_big, 0) end, { repeat_trigger = true })
-    hl.bind("L", function() do_resize(step_big, 0) end, { repeat_trigger = true })
-    hl.bind("J", function() do_resize(0, step_big) end, { repeat_trigger = true })
-    hl.bind("K", function() do_resize(0, -step_big) end, { repeat_trigger = true })
+    -- Coarse adjustments (H, J, K, L): 30px
+    hl.bind("H", resize_action(-step_big, 0), { repeat_trigger = true })
+    hl.bind("L", resize_action(step_big, 0), { repeat_trigger = true })
+    hl.bind("J", resize_action(0, step_big), { repeat_trigger = true })
+    hl.bind("K", resize_action(0, -step_big), { repeat_trigger = true })
 
     -- Save / Restore width presets
     submap_cmd("s", "Save Width", "omarchy-hyprland-window-width save")

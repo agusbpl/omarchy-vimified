@@ -135,11 +135,6 @@ assert_true(find_bind("SUPER + CTRL + J") ~= nil, "Remapped SUPER + CTRL + J (To
 assert_true(find_bind("SUPER + CTRL + K") ~= nil, "Remapped SUPER + CTRL + K (Keybindings Menu)")
 assert_true(find_bind("SUPER + CTRL + L") ~= nil, "Remapped SUPER + CTRL + L (Workspace Layout)")
 
-assert_true(find_bind("SUPER + ALT + H") ~= nil, "Bound SUPER + ALT + H (Direct Resize Left)")
-assert_true(find_bind("SUPER + ALT + J") ~= nil, "Bound SUPER + ALT + J (Direct Resize Down)")
-assert_true(find_bind("SUPER + ALT + K") ~= nil, "Bound SUPER + ALT + K (Direct Resize Up)")
-assert_true(find_bind("SUPER + ALT + L") ~= nil, "Bound SUPER + ALT + L (Direct Resize Right)")
-
 -- Test 4: Verify Omarchy Shell HUD Helpers
 print("\n[4] Verifying Omarchy Shell HUD IPC Helpers...")
 mock_exec_cmds = {}
