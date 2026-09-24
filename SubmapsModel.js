@@ -53,7 +53,7 @@ var DEFAULT_SUBMAPS = {
       ["e", "Edit Binds (Neovim)"],
       ["w", "WiFi Network Menu"],
       ["b", "Bluetooth Devices"],
-      ["c", "Activate Camera"],
+      ["y", "Activate Camera"],
       ["r", "Record Video"],
       ["s", "Screenshot"],
       ["a", "Audio Settings"],
@@ -62,14 +62,13 @@ var DEFAULT_SUBMAPS = {
       ["i", "Idle Lock Toggle"],
       ["z", "Zoom Cursor"],
       ["d", "Display Panel"],
-      ["t", "Activity Monitor"],
+      ["t", "Theme Menu"],
+      ["g", "Wallpaper Menu"],
+      ["u", "Toggle Top Bar"],
+      ["k", "Keybindings Menu"],
+      ["c", "Capture Menu"],
+      ["o", "Power Panel"],
       ["x", "Lock Screen"],
-      ["k", "Power Panel"],
-      ["Shift+B", "Wallpaper Menu"],
-      ["Shift+T", "Theme Menu"],
-      ["Shift+V", "Toggle Top Bar"],
-      ["Shift+K", "Keybindings Menu"],
-      ["Shift+C", "Capture Menu"],
       ["q", "Shutdown System"],
       ["v", "+Volume Control..."],
       ["l", "+Brightness Control..."]
@@ -119,7 +118,7 @@ var DEFAULT_SUBMAPS = {
       ["t", "Terminal"],
       ["j", "JupyterLab"],
       ["g", "Lazygit"],
-      ["Shift+g", "GitHub Web"],
+      ["h", "GitHub Web"],
       ["d", "Discord"]
     ]
   },
@@ -138,11 +137,11 @@ var DEFAULT_SUBMAPS = {
       ["z", "Zathura PDF"],
       ["t", "DeepL Translator"],
       ["w", "WordReference"],
-      ["Shift+w", "Wikipedia ES"],
+      ["k", "Wikipedia ES"],
       ["e", "Excalidraw"],
       ["r", "Reading Tracker"],
-      ["q", "Calculator"],
-      ["Shift+E", "Emojis Picker"]
+      ["c", "Calculator"],
+      ["i", "Emojis Picker"]
     ]
   },
   "IA": {
@@ -277,14 +276,14 @@ var DEFAULT_SUBMAPS = {
     "tag": "SUBMAP [ALT + F]",
     "entries": [
       ["f", "Fullscreen"],
-      ["F", "Tiled Fullscreen"],
+      ["b", "Tiled Fullscreen"],
       ["m", "Maximized (Full Width)"],
       ["t", "Toggle Float/Tile"],
       ["p", "Pseudo Tile"],
       ["o", "Pop Out (Float & Pin)"],
       ["s", "Toggle Split"],
       ["g", "Toggle Group"],
-      ["G", "Move Out of Group"],
+      ["u", "Move Out of Group"],
       ["w", "Save Width"],
       ["r", "Restore Width"],
       ["l", "Lock Screen"]
