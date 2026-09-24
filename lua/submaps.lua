@@ -273,30 +273,72 @@ function M.setup_standard_submaps()
     -- Fullscreen variants
     hl.bind("f", function()
       reset_submap()
-      hl.exec_cmd("hyprctl dispatch fullscreen 0")
+      if hl.dsp and hl.dsp.window and hl.dsp.window.fullscreen then
+        hl.dispatch(hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+      else
+        hl.exec_cmd("hyprctl dispatch fullscreen 0")
+      end
     end, { description = "Fullscreen" })
-    hl.bind("F", function()
-      reset_submap()
-      hl.exec_cmd("hyprctl dispatch fullscreen 1")
-    end, { description = "Tiled Fullscreen" })
+
+    submap_cmd("F", "Tiled Fullscreen", "omarchy-hyprland-window-tiled-fullscreen-toggle")
+
     hl.bind("m", function()
       reset_submap()
-      hl.exec_cmd("hyprctl dispatch fullscreen 2")
+      if hl.dsp and hl.dsp.window and hl.dsp.window.fullscreen then
+        hl.dispatch(hl.dsp.window.fullscreen({ mode = "maximized" }))
+      else
+        hl.exec_cmd("hyprctl dispatch fullscreen 2")
+      end
     end, { description = "Maximized" })
 
     -- Window state toggles
-    submap_cmd("t", "Toggle Float/Tile", "hyprctl dispatch togglefloating")
-    submap_cmd("p", "Pseudo Tile", "hyprctl dispatch pseudo")
-    hl.bind("o", function()
+    hl.bind("t", function()
       reset_submap()
-      hl.exec_cmd("hyprctl dispatch togglefloating")
-      hl.exec_cmd("hyprctl dispatch pin")
-    end, { description = "Pop Out (Float & Pin)" })
-    submap_cmd("s", "Toggle Split", "hyprctl dispatch togglesplit")
+      if hl.dsp and hl.dsp.window and hl.dsp.window.float then
+        hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+      else
+        hl.exec_cmd("hyprctl dispatch togglefloating")
+      end
+    end, { description = "Toggle Float/Tile" })
+
+    hl.bind("p", function()
+      reset_submap()
+      if hl.dsp and hl.dsp.window and hl.dsp.window.pseudo then
+        hl.dispatch(hl.dsp.window.pseudo())
+      else
+        hl.exec_cmd("hyprctl dispatch pseudo")
+      end
+    end, { description = "Pseudo Tile" })
+
+    submap_cmd("o", "Pop Out (Float & Pin)", "omarchy-hyprland-window-pop")
+
+    hl.bind("s", function()
+      reset_submap()
+      if hl.dsp and hl.dsp.layout then
+        hl.dispatch(hl.dsp.layout("togglesplit"))
+      else
+        hl.exec_cmd("hyprctl dispatch togglesplit")
+      end
+    end, { description = "Toggle Split" })
 
     -- Window groups
-    submap_cmd("g", "Toggle Group", "hyprctl dispatch togglegroup")
-    submap_cmd("G", "Move Out of Group", "hyprctl dispatch moveoutofgroup")
+    hl.bind("g", function()
+      reset_submap()
+      if hl.dsp and hl.dsp.group and hl.dsp.group.toggle then
+        hl.dispatch(hl.dsp.group.toggle())
+      else
+        hl.exec_cmd("hyprctl dispatch togglegroup")
+      end
+    end, { description = "Toggle Group" })
+
+    hl.bind("G", function()
+      reset_submap()
+      if hl.dsp and hl.dsp.window and hl.dsp.window.move then
+        hl.dispatch(hl.dsp.window.move({ out_of_group = true }))
+      else
+        hl.exec_cmd("hyprctl dispatch moveoutofgroup")
+      end
+    end, { description = "Move Out of Group" })
 
     -- Width presets
     submap_cmd("w", "Save Width", "omarchy-hyprland-window-width save")

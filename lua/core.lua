@@ -95,6 +95,7 @@ function M.bind_submap(key_char, submap_name, modifier)
   end
 
   hl.bind(mod .. " + " .. key_char:lower(), enter_submap)
+  hl.bind(mod .. " + " .. key_char:upper(), enter_submap)
 end
 
 --- Set up Vim HJKL navigation, swapping, and Omarchy default collision remappings
