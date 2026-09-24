@@ -380,21 +380,35 @@ function M.setup_standard_submaps()
       end
     end
 
-    -- Top Row: Jump to Workspace 1..10 (q..p)
+    -- Top Row (Physical & Mnemonic): Jump to Workspace 1..10
+    -- Physical keycodes 24..33 correspond to top letter row (q..p on QWERTY, a..p on AZERTY, etc.)
     local jump_keys = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p" }
-    for i, k in ipairs(jump_keys) do
-      hl.bind(k, ws_jump(i), { description = string.format("Jump to Workspace %d", i) })
+    for i = 1, 10 do
+      local action = ws_jump(i)
+      local desc = string.format("Jump to Workspace %d", i)
+      hl.bind("code:" .. tostring(i + 23), action, { description = desc })
+      if jump_keys[i] then
+        hl.bind(jump_keys[i], action, { description = desc })
+      end
     end
 
-    -- Home Row: Move Active Window to Workspace 1..10 & Follow (a..ñ / ;)
+    -- Home Row (Physical & Mnemonic): Move Active Window to Workspace 1..10 & Follow
+    -- Physical keycodes 38..47 correspond to home row keys (a..; on QWERTY, q..m on AZERTY, a..ñ on Latam/ES)
     local move_keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l" }
-    for i, k in ipairs(move_keys) do
-      hl.bind(k, ws_move(i), { description = string.format("Move Window to Workspace %d", i) })
+    for i = 1, 9 do
+      local action = ws_move(i)
+      local desc = string.format("Move Window to Workspace %d", i)
+      hl.bind("code:" .. tostring(i + 37), action, { description = desc })
+      hl.bind(move_keys[i], action, { description = desc })
     end
-    -- Workspace 10 on home row (ñ for latam / ; for US layout)
-    hl.bind("ñ", ws_move(10), { description = "Move Window to Workspace 10" })
-    hl.bind(";", ws_move(10), { description = "Move Window to Workspace 10" })
-    hl.bind("SEMICOLON", ws_move(10), { description = "Move Window to Workspace 10" })
+
+    -- Workspace 10 on home row:
+    -- Physical keycode 47 is the 10th home row key on ANY keyboard (ANSI/ISO)
+    local ws10_move = ws_move(10)
+    local ws10_desc = "Move Window to Workspace 10"
+    hl.bind("code:47", ws10_move, { description = ws10_desc })
+    hl.bind("semicolon", ws10_move, { description = ws10_desc })
+    hl.bind("ntilde", ws10_move, { description = ws10_desc })
 
     -- Special: Previous Workspace (TAB)
     hl.bind("TAB", function()

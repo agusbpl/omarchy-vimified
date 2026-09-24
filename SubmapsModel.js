@@ -306,7 +306,7 @@ var DEFAULT_SUBMAPS = {
       ["u / j", "WS 7 (Jump / Move)"],
       ["i / k", "WS 8 (Jump / Move)"],
       ["o / l", "WS 9 (Jump / Move)"],
-      ["p / ñ", "WS 10 (Jump / Move)"],
+      ["p / ; (ñ)", "WS 10 (Jump / Move)"],
       ["TAB", "Previous Workspace"]
     ]
   }
