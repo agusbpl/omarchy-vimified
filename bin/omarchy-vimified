@@ -69,7 +69,7 @@ cmd_list() {
     echo "  • Office       [ALT + O]     : Documents, notes, spreadsheets, reading"
     echo "  • IA           [ALT + I]     : AI assistants, LLMs, voice dictation"
     echo "  • NAV          [ALT + N]     : Web apps, social, mail, video"
-    echo "  • Menus        [ALT + M]     : Omarchy menus, capture, themes, calculators"
+    echo "  • Media        [ALT + M]     : Spotify, cliamp, playback controls, volume"
     echo "  • Reminders    [ALT + R]     : Notifications and reminders management"
     echo "  • TTS          [ALT + T]     : Piper text-to-speech synthesizers"
     echo "  • UNLP         [ALT + U]     : University educational portals"

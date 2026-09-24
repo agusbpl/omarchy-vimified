@@ -232,7 +232,7 @@ local expected_submaps = {
   "NAV",
   "Frames",
   "Resize",
-  "Menus",
+  "Media",
   "Reminders",
   "TTS",
   "Volume",
@@ -254,7 +254,7 @@ assert_true(find_bind("ALT + i") ~= nil, "IA trigger: ALT + i")
 assert_true(find_bind("ALT + n") ~= nil, "NAV trigger: ALT + n")
 assert_true(find_bind("ALT + f") ~= nil, "Frames trigger: ALT + f")
 assert_true(find_bind("ALT + d") ~= nil, "Resize trigger: ALT + d")
-assert_true(find_bind("ALT + m") ~= nil, "Menus trigger: ALT + m")
+assert_true(find_bind("ALT + m") ~= nil, "Media trigger: ALT + m")
 assert_true(find_bind("ALT + r") ~= nil, "Reminders trigger: ALT + r")
 assert_true(find_bind("ALT + t") ~= nil, "TTS trigger: ALT + t")
 

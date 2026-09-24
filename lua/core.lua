@@ -17,11 +17,9 @@ M.hub_targets = {
   { keys = { "n", "N" }, name = "NAV" },
   { keys = { "f", "F" }, name = "Frames" },
   { keys = { "d", "D" }, name = "Resize" },
-  { keys = { "m", "M" }, name = "Menus" },
+  { keys = { "m", "M" }, name = "Media" },
   { keys = { "r", "R" }, name = "Reminders" },
   { keys = { "t", "T" }, name = "TTS" },
-  { keys = { "v", "V" }, name = "Volume" },
-  { keys = { "b", "B" }, name = "Brightness" },
 }
 
 --- Register an additional target in the Hub submap

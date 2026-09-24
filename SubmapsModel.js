@@ -12,7 +12,7 @@ var SVG_ICONS = {
   "IA": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%222%22%3E%3C/rect%3E%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%226%22%20height%3D%226%22%3E%3C/rect%3E%3Cline%20x1%3D%229%22%20y1%3D%221%22%20x2%3D%229%22%20y2%3D%224%22%3E%3C/line%3E%3Cline%20x1%3D%2215%22%20y1%3D%221%22%20x2%3D%2215%22%20y2%3D%224%22%3E%3C/line%3E%3Cline%20x1%3D%229%22%20y1%3D%2220%22%20x2%3D%229%22%20y2%3D%2223%22%3E%3C/line%3E%3Cline%20x1%3D%2215%22%20y1%3D%2220%22%20x2%3D%2215%22%20y2%3D%2223%22%3E%3C/line%3E%3Cline%20x1%3D%2220%22%20y1%3D%229%22%20x2%3D%2223%22%20y2%3D%229%22%3E%3C/line%3E%3Cline%20x1%3D%2220%22%20y1%3D%2214%22%20x2%3D%2223%22%20y2%3D%2214%22%3E%3C/line%3E%3Cline%20x1%3D%221%22%20y1%3D%229%22%20x2%3D%224%22%20y2%3D%229%22%3E%3C/line%3E%3Cline%20x1%3D%221%22%20y1%3D%2214%22%20x2%3D%224%22%20y2%3D%2214%22%3E%3C/line%3E%3C/svg%3E",
   "NAV": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%3E%3C/circle%3E%3Cline%20x1%3D%222%22%20y1%3D%2212%22%20x2%3D%2222%22%20y2%3D%2212%22%3E%3C/line%3E%3Cpath%20d%3D%22M12%202a15.3%2015.3%200%200%201%204%2010%2015.3%2015.3%200%200%201-4%2010%2015.3%2015.3%200%200%201-4-10%2015.3%2015.3%200%200%201%204-10z%22%3E%3C/path%3E%3C/svg%3E",
   "UNLP": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%2010v6M2%2010l10-5%2010%205-10%205z%22%3E%3C/path%3E%3Cpath%20d%3D%22M6%2012v5c3%203%209%203%2012%200v-5%22%3E%3C/path%3E%3C/svg%3E",
-  "Menus": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2213.5%22%20cy%3D%226.5%22%20r%3D%22.5%22%3E%3C/circle%3E%3Ccircle%20cx%3D%2217.5%22%20cy%3D%2210.5%22%20r%3D%22.5%22%3E%3C/circle%3E%3Ccircle%20cx%3D%228.5%22%20cy%3D%227.5%22%20r%3D%22.5%22%3E%3C/circle%3E%3Ccircle%20cx%3D%226.5%22%20cy%3D%2212.5%22%20r%3D%22.5%22%3E%3C/circle%3E%3Cpath%20d%3D%22M12%202C6.5%202%202%206.5%202%2012s4.5%2010%2010%2010c.926%200%201.648-.746%201.648-1.688%200-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64%201.64%200%200%201%201.668-1.668h1.996c3.051%200%205.555-2.503%205.555-5.554C21.965%206.012%2017.461%202%2012%202z%22%3E%3C/path%3E%3C/svg%3E",
+  "Media": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2018V5l12-2v13%22%3E%3C/path%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2218%22%20r%3D%223%22%3E%3C/circle%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2216%22%20r%3D%223%22%3E%3C/circle%3E%3C/svg%3E",
   "Reminders": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M18%208A6%206%200%200%200%206%208c0%207-3%209-3%209h18s-3-2-3-9%22%3E%3C/path%3E%3Cpath%20d%3D%22M13.73%2021a2%202%200%200%201-3.46%200%22%3E%3C/path%3E%3C/svg%3E",
   "TTS": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%201a3%203%200%200%200-3%203v8a3%203%200%200%200%206%200V4a3%203%200%200%200-3-3z%22%3E%3C/path%3E%3Cpath%20d%3D%22M19%2010v2a7%207%200%200%201-14%200v-2%22%3E%3C/path%3E%3Cline%20x1%3D%2212%22%20y1%3D%2219%22%20x2%3D%2212%22%20y2%3D%2223%22%3E%3C/line%3E%3Cline%20x1%3D%228%22%20y1%3D%2223%22%20x2%3D%2216%22%20y2%3D%2223%22%3E%3C/line%3E%3C/svg%3E",
   "Volume": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolygon%20points%3D%2211%205%206%209%202%209%202%2015%206%2015%2011%2019%2011%205%22%3E%3C/polygon%3E%3Cpath%20d%3D%22M19.07%204.93a10%2010%200%200%201%200%2014.14M15.54%208.46a5%205%200%200%201%200%207.07%22%3E%3C/path%3E%3C/svg%3E",
@@ -37,11 +37,9 @@ var DEFAULT_SUBMAPS = {
       ["f", "+Frames (Windows)..."],
       ["d", "+Resize (Dims)..."],
       ["u", "+UNLP"],
-      ["m", "+Menus"],
+      ["m", "+Media..."],
       ["r", "+Reminders"],
-      ["t", "+TTS"],
-      ["v", "+Volume..."],
-      ["b", "+Brightness..."]
+      ["t", "+TTS"]
     ]
   },
   "System": {
@@ -67,6 +65,11 @@ var DEFAULT_SUBMAPS = {
       ["t", "Activity Monitor"],
       ["x", "Lock Screen"],
       ["k", "Power Panel"],
+      ["Shift+B", "Wallpaper Menu"],
+      ["Shift+T", "Theme Menu"],
+      ["Shift+V", "Toggle Top Bar"],
+      ["Shift+K", "Keybindings Menu"],
+      ["Shift+C", "Capture Menu"],
       ["q", "Shutdown System"],
       ["v", "+Volume Control..."],
       ["l", "+Brightness Control..."]
@@ -137,7 +140,9 @@ var DEFAULT_SUBMAPS = {
       ["w", "WordReference"],
       ["Shift+w", "Wikipedia ES"],
       ["e", "Excalidraw"],
-      ["r", "Reading Tracker"]
+      ["r", "Reading Tracker"],
+      ["q", "Calculator"],
+      ["Shift+E", "Emojis Picker"]
     ]
   },
   "IA": {
@@ -189,25 +194,20 @@ var DEFAULT_SUBMAPS = {
       ["h", "OpenStax Biology"]
     ]
   },
-  "Menus": {
-    "icon": "🎨",
-    "iconSvg": SVG_ICONS["Menus"],
-    "title": "Menus",
+  "Media": {
+    "icon": "🎵",
+    "iconSvg": SVG_ICONS["Media"],
+    "title": "Media Player",
     "tag": "SUBMAP [ALT + M]",
     "entries": [
-      ["m", "Omarchy Main Menu"],
-      ["a", "Apps Menu"],
-      ["e", "Emojis Picker"],
-      ["b", "Background Switcher"],
-      ["t", "Theme Menu"],
-      ["s", "Share Menu"],
-      ["h", "Hardware Menu"],
-      ["v", "Toggle Top Bar"],
-      ["k", "Keybindings Menu"],
-      ["c", "Capture Menu"],
-      ["r", "Herdr Keybindings"],
-      ["q", "Calculator"],
-      ["p", "Power Panel"]
+      ["s", "Spotify"],
+      ["c", "Cliamp TUI"],
+      ["Space", "Play / Pause"],
+      ["l", "Next Track"],
+      ["h", "Previous Track"],
+      ["k / K", "+5% Volume Up"],
+      ["j / J", "-5% Volume Down"],
+      ["m", "Mute Toggle"]
     ]
   },
   "Reminders": {

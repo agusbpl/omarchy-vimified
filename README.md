@@ -133,19 +133,18 @@ Press `ALT + <Key>` to enter a modal submap. The Which-Key HUD will immediately 
 
 | Trigger | Submap Name | Content & Actions |
 | :--- | :--- | :--- |
-| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `f`, `d`, etc.) |
+| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `f`, `d`, `m`, `r`, `t`) |
 | `ALT + F` | **🖥️ Frames** | **Unified Window Management:** Fullscreen (`f`/`F`/`m`), Float/Tile (`t`), Pseudo (`p`), Pop-out (`o`), Split (`s`), Groups (`g`/`G`), Width presets (`w`/`r`), Lock screen (`l`) |
 | `ALT + D` | **📐 Window Resize** | Modal micro-adjustments (**D**imensions: `h`/`l` width 10px, `j`/`k` height 10px, `H`/`L`/`J`/`K` fast 30px, `s`/`r` save & restore width) |
-| `ALT + S` | **⚙️ System & Hardware** | Nautilus, Btop, config editing, WiFi, Bluetooth, Camera, Screenshot, Screen recording, Nightlight, Idle Lock, Zoom, Display panel, Lock screen, Power panel, Shutdown |
+| `ALT + S` | **⚙️ System & Hardware** | Nautilus, Btop, config editing, WiFi, Bluetooth, Camera, Screenshot, Screen recording, Nightlight, Idle Lock, Zoom, Display panel, Lock screen, Power panel, Wallpaper (`Shift+B`), Theme (`Shift+T`), Top Bar toggle (`Shift+V`), Keybindings (`Shift+K`), Capture menu (`Shift+C`), Shutdown, Volume (`v`), Brightness (`l`) |
 | `ALT + P` | **💻 Programming & Dev** | Antigravity AI, Zed, Terminal, JupyterLab, LazyGit, GitHub Web, Discord |
 | `ALT + L` | **📚 Learning & Data** | Python, Pandas, Polars, PyTorch, SQL, Jupyter, Hugging Face, documentation and local cheatsheets |
 | `ALT + I` | **🤖 AI & Assistants** | Gemini, Claude, ChatGPT, Mistral AI, Perplexity, DeepSeek, Kimi, NotebookLM, OpenCode, Grok, Phind, Voice dictation |
-| `ALT + O` | **📝 Office & Documents** | Obsidian notes, OnlyOffice, Gmail, Docs, Sheets, Okular/Zathura PDF, DeepL, WordReference, Wikipedia, Excalidraw, Reading Tracker |
+| `ALT + O` | **📝 Office & Documents** | Obsidian notes, OnlyOffice, Gmail, Docs, Sheets, Okular/Zathura PDF, DeepL, WordReference, Wikipedia, Excalidraw, Reading Tracker, Calculator (`q`), Emojis picker (`Shift+E`) |
 | `ALT + N` | **🌐 Navigation & Web** | Browser, Gmail, YouTube, YouTube Studio, Telegram, WhatsApp Web, X / Twitter |
-| `ALT + M` | **🎨 Omarchy Menus** | Main menu, Apps, Emoji picker, Theme selector, Wallpaper switcher, Share menu, Hardware menu, Top Bar toggle, Keybindings, Capture menu, Herdr keybindings, Calculator, Power panel |
+| `ALT + M` | **🎵 Media Player** | Spotify (`s`), Cliamp TUI (`c`), Play/Pause (`Space`), Next/Prev track (`l`/`h`), Volume control (`k`/`j`), Mute (`m`) |
 | `ALT + R` | **🔔 Reminders & Alerts** | Set timer, view active reminders, dismiss alerts, silence notifications |
 | `ALT + T` | **🗣️ Text to Speech** | Read selection aloud via Piper TTS (Spanish / English voices) |
-| `ALT + V` / `ALT + B` | **🔊 Media & Brightness** | Continuous quick adjustments (`k`/`j` for volume/brightness up & down, `m` for mute) — accessible directly or nested under System |
 
 ---
 
