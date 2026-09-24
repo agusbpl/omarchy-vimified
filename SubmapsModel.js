@@ -18,7 +18,8 @@ var SVG_ICONS = {
   "Volume": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolygon%20points%3D%2211%205%206%209%202%209%202%2015%206%2015%2011%2019%2011%205%22%3E%3C/polygon%3E%3Cpath%20d%3D%22M19.07%204.93a10%2010%200%200%201%200%2014.14M15.54%208.46a5%205%200%200%201%200%207.07%22%3E%3C/path%3E%3C/svg%3E",
   "Brightness": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%225%22%3E%3C/circle%3E%3Cline%20x1%3D%2212%22%20y1%3D%221%22%20x2%3D%2212%22%20y2%3D%223%22%3E%3C/line%3E%3Cline%20x1%3D%2212%22%20y1%3D%2221%22%20x2%3D%2212%22%20y2%3D%2223%22%3E%3C/line%3E%3Cline%20x1%3D%224.22%22%20y1%3D%224.22%22%20x2%3D%225.64%22%20y2%3D%225.64%22%3E%3C/line%3E%3Cline%20x1%3D%2218.36%22%20y1%3D%2218.36%22%20x2%3D%2219.78%22%20y2%3D%2219.78%22%3E%3C/line%3E%3Cline%20x1%3D%221%22%20y1%3D%2212%22%20x2%3D%223%22%20y2%3D%2212%22%3E%3C/line%3E%3Cline%20x1%3D%2221%22%20y1%3D%2212%22%20x2%3D%2223%22%20y2%3D%2212%22%3E%3C/line%3E%3Cline%20x1%3D%224.22%22%20y1%3D%2219.78%22%20x2%3D%225.64%22%20y2%3D%2218.36%22%3E%3C/line%3E%3Cline%20x1%3D%2218.36%22%20y1%3D%225.64%22%20x2%3D%2219.78%22%20y2%3D%224.22%22%3E%3C/line%3E%3C/svg%3E",
   "Resize": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15%203h6v6M9%2021H3v-6M21%203l-7%207M3%2021l7-7%22%3E%3C/path%3E%3C/svg%3E",
-  "Frames": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%2220%22%20height%3D%2214%22%20rx%3D%222%22%20ry%3D%222%22%3E%3C/rect%3E%3Cline%20x1%3D%228%22%20y1%3D%2221%22%20x2%3D%2216%22%20y2%3D%2221%22%3E%3C/line%3E%3Cline%20x1%3D%2212%22%20y1%3D%2217%22%20x2%3D%2212%22%20y2%3D%2221%22%3E%3C/line%3E%3C/svg%3E"
+  "Frames": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%2220%22%20height%3D%2214%22%20rx%3D%222%22%20ry%3D%222%22%3E%3C/rect%3E%3Cline%20x1%3D%228%22%20y1%3D%2221%22%20x2%3D%2216%22%20y2%3D%2221%22%3E%3C/line%3E%3Cline%20x1%3D%2212%22%20y1%3D%2217%22%20x2%3D%2212%22%20y2%3D%2221%22%3E%3C/line%3E%3C/svg%3E",
+  "Workspaces": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237aa2f7%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%227%22%20height%3D%227%22%3E%3C/rect%3E%3Crect%20x%3D%2214%22%20y%3D%223%22%20width%3D%227%22%20height%3D%227%22%3E%3C/rect%3E%3Crect%20x%3D%2214%22%20y%3D%2214%22%20width%3D%227%22%20height%3D%227%22%3E%3C/rect%3E%3Crect%20x%3D%223%22%20y%3D%2214%22%20width%3D%227%22%20height%3D%227%22%3E%3C/rect%3E%3C/svg%3E"
 };
 
 var DEFAULT_SUBMAPS = {
@@ -35,6 +36,7 @@ var DEFAULT_SUBMAPS = {
       ["i", "+AI"],
       ["n", "+Navigation"],
       ["f", "+Frames (Windows)..."],
+      ["e", "+Workspaces..."],
       ["d", "+Resize (Dims)..."],
       ["u", "+UNLP"],
       ["m", "+Media..."],
@@ -287,6 +289,25 @@ var DEFAULT_SUBMAPS = {
       ["w", "Save Width"],
       ["r", "Restore Width"],
       ["l", "Lock Screen"]
+    ]
+  },
+  "Workspaces": {
+    "icon": "🗂️",
+    "iconSvg": SVG_ICONS["Workspaces"],
+    "title": "Workspaces",
+    "tag": "SUBMAP [ALT + E]",
+    "entries": [
+      ["q / a", "WS 1 (Jump / Move)"],
+      ["w / s", "WS 2 (Jump / Move)"],
+      ["e / d", "WS 3 (Jump / Move)"],
+      ["r / f", "WS 4 (Jump / Move)"],
+      ["t / g", "WS 5 (Jump / Move)"],
+      ["y / h", "WS 6 (Jump / Move)"],
+      ["u / j", "WS 7 (Jump / Move)"],
+      ["i / k", "WS 8 (Jump / Move)"],
+      ["o / l", "WS 9 (Jump / Move)"],
+      ["p / ñ", "WS 10 (Jump / Move)"],
+      ["TAB", "Previous Workspace"]
     ]
   }
 };

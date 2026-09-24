@@ -355,6 +355,63 @@ function M.setup_standard_submaps()
   bind_submap("F", "Frames")
 
   -- ---------------------------------------------------------
+  -- 11c. ALT + E -> Workspaces (Home Row & Top Row Workspaces)
+  -- ---------------------------------------------------------
+  hl.define_submap("Workspaces", function()
+    local function ws_jump(num)
+      return function()
+        reset_submap()
+        if hl.dsp and hl.dsp.focus then
+          hl.dispatch(hl.dsp.focus({ workspace = tostring(num) }))
+        else
+          hl.exec_cmd(string.format("hyprctl dispatch workspace %d", num))
+        end
+      end
+    end
+
+    local function ws_move(num)
+      return function()
+        reset_submap()
+        if hl.dsp and hl.dsp.window and hl.dsp.window.move then
+          hl.dispatch(hl.dsp.window.move({ workspace = tostring(num) }))
+        else
+          hl.exec_cmd(string.format("hyprctl dispatch movetoworkspace %d", num))
+        end
+      end
+    end
+
+    -- Top Row: Jump to Workspace 1..10 (q..p)
+    local jump_keys = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p" }
+    for i, k in ipairs(jump_keys) do
+      hl.bind(k, ws_jump(i), { description = string.format("Jump to Workspace %d", i) })
+    end
+
+    -- Home Row: Move Active Window to Workspace 1..10 & Follow (a..ñ / ;)
+    local move_keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l" }
+    for i, k in ipairs(move_keys) do
+      hl.bind(k, ws_move(i), { description = string.format("Move Window to Workspace %d", i) })
+    end
+    -- Workspace 10 on home row (ñ for latam / ; for US layout)
+    hl.bind("ñ", ws_move(10), { description = "Move Window to Workspace 10" })
+    hl.bind(";", ws_move(10), { description = "Move Window to Workspace 10" })
+    hl.bind("SEMICOLON", ws_move(10), { description = "Move Window to Workspace 10" })
+
+    -- Special: Previous Workspace (TAB)
+    hl.bind("TAB", function()
+      reset_submap()
+      if hl.dsp and hl.dsp.focus then
+        hl.dispatch(hl.dsp.focus({ workspace = "previous" }))
+      else
+        hl.exec_cmd("hyprctl dispatch workspace previous")
+      end
+    end, { description = "Previous Workspace" })
+
+    hl.bind("ESCAPE", reset_submap)
+    hl.bind("RETURN", reset_submap)
+  end)
+  bind_submap("E", "Workspaces")
+
+  -- ---------------------------------------------------------
   -- 11. Window Resize (Quick Adjust) -> ALT + D
   -- ---------------------------------------------------------
   hl.define_submap("Resize", function()

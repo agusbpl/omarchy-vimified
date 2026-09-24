@@ -16,6 +16,7 @@ M.hub_targets = {
   { keys = { "i", "I" }, name = "IA" },
   { keys = { "n", "N" }, name = "NAV" },
   { keys = { "f", "F" }, name = "Frames" },
+  { keys = { "e", "E" }, name = "Workspaces" },
   { keys = { "d", "D" }, name = "Resize" },
   { keys = { "m", "M" }, name = "Media" },
   { keys = { "r", "R" }, name = "Reminders" },

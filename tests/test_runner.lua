@@ -63,6 +63,9 @@ local hl = {
       resize = function(opts)
         return { type = "window.resize", opts = opts }
       end,
+      move = function(opts)
+        return { type = "window.move", opts = opts }
+      end,
     },
     layout = function(name)
       return { type = "layout", name = name }
@@ -231,6 +234,7 @@ local expected_submaps = {
   "IA",
   "NAV",
   "Frames",
+  "Workspaces",
   "Resize",
   "Media",
   "Reminders",
@@ -253,6 +257,7 @@ assert_true(find_bind("ALT + o") ~= nil, "Office trigger: ALT + o")
 assert_true(find_bind("ALT + i") ~= nil, "IA trigger: ALT + i")
 assert_true(find_bind("ALT + n") ~= nil, "NAV trigger: ALT + n")
 assert_true(find_bind("ALT + f") ~= nil, "Frames trigger: ALT + f")
+assert_true(find_bind("ALT + e") ~= nil, "Workspaces trigger: ALT + e")
 assert_true(find_bind("ALT + d") ~= nil, "Resize trigger: ALT + d")
 assert_true(find_bind("ALT + m") ~= nil, "Media trigger: ALT + m")
 assert_true(find_bind("ALT + r") ~= nil, "Reminders trigger: ALT + r")

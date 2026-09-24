@@ -133,8 +133,9 @@ Press `ALT + <Key>` to enter a modal submap. The Which-Key HUD will immediately 
 
 | Trigger | Submap Name | Content & Actions |
 | :--- | :--- | :--- |
-| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `f`, `d`, `m`, `r`, `t`) |
+| `ALT + ENTER` | **⚡ Master Hub** | Springboard linking directly into all submaps (`s`, `l`, `p`, `o`, `i`, `n`, `f`, `e`, `d`, `m`, `r`, `t`) |
 | `ALT + F` | **🖥️ Frames** | **Unified Window Management:** Fullscreen (`f`), Boxed/Tiled Fullscreen (`b`), Maximized (`m`), Float/Tile (`t`), Pseudo (`p`), Pop-out (`o`), Split (`s`), Group (`g`), Ungroup (`u`), Width presets (`w`/`r`), Lock screen (`l`) |
+| `ALT + E` | **🗂️ Workspaces** | **Workspace Jump & Window Move:** Vertical pair columns (`q`/`a` WS 1 ... `p`/`ñ` WS 10), Previous workspace (`TAB`) |
 | `ALT + D` | **📐 Window Resize** | Modal micro-adjustments (**D**imensions: `h`/`l` width 10px, `j`/`k` height 10px, `H`/`L`/`J`/`K` fast 30px, `s`/`r` save & restore width) |
 | `ALT + S` | **⚙️ System & Hardware** | Nautilus (`f`), Btop (`m`), Edit binds (`e`), WiFi (`w`), Bluetooth (`b`), Camera (`y`), Video record (`r`), Screenshot (`s`), Audio (`a`), Clipboard (`p`), Nightlight (`n`), Idle (`i`), Zoom (`z`), Display (`d`), Theme (`t`), Wallpaper (`g`), Top Bar (`u`), Keybindings (`k`), Capture (`c`), Power (`o`), Lock (`x`), Shutdown (`q`), Volume (`v`), Brightness (`l`) |
 | `ALT + P` | **💻 Programming & Dev** | Antigravity AI (`a`), Colab (`c`), Zed (`e`), Terminal (`t`), JupyterLab (`j`), LazyGit (`g`), GitHub Web (`h`), Discord (`d`) |

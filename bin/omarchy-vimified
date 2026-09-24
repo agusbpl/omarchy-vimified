@@ -62,6 +62,7 @@ cmd_list() {
     echo "=== Active omarchy-vimified Submaps ==="
     echo "  • Hub          [ALT + ENTER] : Master index of all submaps"
     echo "  • Frames       [ALT + F]     : Fullscreen, floating, tiling, grouping, lock"
+    echo "  • Workspaces   [ALT + E]     : Home row & top row workspace jump & window move"
     echo "  • Resize       [ALT + D]     : Window dimensions micro/macro adjustments"
     echo "  • System       [ALT + S]     : Hardware, display, wifi, bluetooth, panels"
     echo "  • Learning     [ALT + L]     : Programming language docs and cheatsheets"
